@@ -1,0 +1,55 @@
+.article
+{
+  border-radius: 10px;
+  background: #9E9E9E;
+  padding: 30px;
+  box-shadow:  10px 10px #616161;
+
+}
+.body
+{
+  font-family: sans-serif;
+
+}
+.btn1
+{
+  border:none;
+  border-radius: 0px;
+  padding: 10px 25px;
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 300;
+  margin-right: 15px;
+  display: inline-block;
+  transition:all 0.3s;
+  -webkit-transition:all 0.3s;
+}
+.img-prd
+{
+    display: block;
+    margin: auto;
+    width: 50%;
+}
+
+.article-img
+{
+  border-radius: 20px;
+  padding: 0px;
+  width: 100%;
+  height: auto;
+}
+
+.navbar
+{
+    border-radius: 20px;
+}
+
+@media only screen and (min-width: 1080px) {
+.article-img
+{
+  border-radius: 20px;
+  padding: 0px;
+  width: 40%;
+  height: auto;
+}
+}

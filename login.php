@@ -36,22 +36,22 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label for="email">E-mail</label>
-                    <input type="email" class="form-control input-sm" id="email"  autocomplete="off" required>
+                    <input type="email" class="form-control input-sm" id="email"  required>
                 </div>
             </div>
 
             <!-- Password -->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group contact-field">
-                    <label for="psw">Password</label>
-                    <input  type="password"  class="form-control input-sm" id="password" minlength="8" maxlength="16" autocomplete="off" required>
+                    <label for="password">Password</label>
+                    <input  type="password"  class="form-control input-sm" id="password" minlength="8" maxlength="16"  required>
                 </div>
             </div>
 
 
 
 
-
+            <!-- div che contiene il bottone sara una colonna da 12 -->
             <div class="col-xs-12">
 
               <!-- Bottone Accedi -->

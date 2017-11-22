@@ -6,27 +6,30 @@
   /*COSTANTI PER LA CONNESSIONE*/
 
   /* Indirizzo IP del server */
-  define("servername","localhost");
+  define("DB_SERVERNAME","localhost");
 
   /* Username account DBMS */
-  define("username","website");
+  define("DB_USERNAME","website");
 
   /* Password account DBMS */
-  define("password","darioesimone");
+  define("DB_PASSWORD","darioesimone");
 
   /* Nome del database da usare*/
-  define("database_name","ecommerce");
+  define("DATABASE_NAME","ecommerce");
 
 
   /*TEST AREA*/
-  connessione_db();
+  $conn = connessione_db();
+  mysqli_close($conn);
+
   /*END TEST AREA*/
 
   /* Funzione che crea e restituisce una connessione al database selezionato */
+  /* Ricordarsi di chiudere la connessione dopo averla utilizzata*/
   function connessione_db()
   {
     //Provo a connettermi al database
-    $conn = mysqli_connect(servername,username,password,database_name);
+    $conn = mysqli_connect(DB_SERVERNAME,DB_USERNAME,DB_PASSWORD,DATABASE_NAME);
 
     //Testo la connessione
     if(!$conn)
@@ -40,5 +43,16 @@
       return $conn;
     }
   }
+
+  /* Funzione definita da W3Schools per controllare gli input ed evitare exploit */
+  function test_input($data)
+  {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
+
+
 
  ?>

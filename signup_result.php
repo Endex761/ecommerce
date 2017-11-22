@@ -32,9 +32,22 @@
       $formOk = false;
 
     if(!empty($_POST['password']))
-      $password = test_input($_POST['password']);
+    {
+      //Controllo inoltre che le due password siano uguali
+      if(!empty($_POST['conferma-password']) && ($_POST['conferma-password'] == $_POST['password']))
+      {
+        $password = test_input($_POST['password']);
+      }
+      else
+      {
+        $formOk = false;
+      }
+    }
     else
+    {
       $formOk = false;
+    }
+
 
     if(!empty($_POST['risposta-recupero-psw']))
       $risposta_recupero_psw = test_input($_POST['risposta-recupero-psw']);

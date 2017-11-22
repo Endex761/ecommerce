@@ -1,7 +1,14 @@
 <?php
-  /* my_sql.php created by Simon Pietro 22/11/2015-01:14 */
+  /* libreria.php created by Simon Pietro 22/11/2015-01:14 */
   //Questo file contiene le funzioni per la gestione del database in mysqli
   //Questo file dovrà essere incluso per la gestione delle connessioni al db
+
+
+  /*Costante IP che consente il reindirizzamento per un corretto funzionamento delle sessioni.*/
+  //define("IP","localhost:8080");
+  define("IP","2.237.61.241:8080");
+
+
 
   /*COSTANTI PER LA CONNESSIONE*/
 
@@ -42,6 +49,13 @@
       //Altrimenti ritorno la connessione al database
       return $conn;
     }
+  }
+
+  /*Funzione che reindirizza alla pagina error_page.php e restituisce il valore di errore*/
+  function errore($message)
+  {
+    header("Location:" . "http://" . IP . "/ecommerce/error_page.php" . "?message=$message");
+    die();
   }
 
   /* Funzione definita da W3Schools per controllare gli input ed evitare exploit */

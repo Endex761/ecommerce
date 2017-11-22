@@ -5,8 +5,7 @@
     Il file contiene il codice necessario per inserire un nuovo utente all'interno del database
   */
 
-  include 'mysql.php';
-  include 'ip.php';
+  include 'libreria.php';
 
   //La variabile controlla se tutti i campi del form sono stati inizializati
   $formOk = true;
@@ -61,13 +60,13 @@
 
       if(!$formOk)
       {
-        echo "FORM NON COMPILATO CORRETTAMENTE";
+        errore("Form non compilato correttamente");
         die();
       }
     }
     else
     {
-      echo "ERRORE GENERICO";
+      errore("Errore generico");
       die();
     }
 
@@ -91,7 +90,7 @@
   //Se la query restituisce almeno una riga allora l'email è già presente
   if(mysqli_num_rows($result_set) > 0)
   {
-    echo "EMAIL GIA' PRESENTE";
+    errore("Email già presente");
     die();
   }
 
@@ -106,15 +105,11 @@
   $query_inserimento_ok = mysqli_query($connessione, $query_inserimento);
 
   if(!$query_inserimento_ok)
-    echo "ERRORE INSERIMENO";
+    errore("Errore registrazione");
   else
     echo "INSERITA CORRETTAMENTE";
 
   //Chiudo la connessione al DATABASE_NAME
   mysqli_close($connessione);
-
-
-
-
 
  ?>

@@ -4,8 +4,7 @@
     Il file contiene il codice necessario per fare il login al sitoweb
   */
 
-  include 'mysql.php';
-  include 'ip.php';
+  include 'libreia.php';
 
   //La variabile controlla se tutti i campi del form sono stati inizializati
   $formOk = true;
@@ -28,13 +27,13 @@
 
     if(!$formOk)
     {
-      echo "FORM NON COMPILATO CORRETTAMENTE";
+      errore("Form non compilato correttamente");
       die();
     }
   }
   else
   {
-    echo "ERRORE GENERICO";
+    errore("Errore generico");
     die();
   }
 
@@ -70,13 +69,16 @@
     }
     else
     {
-      echo "PASSWORD ERRATA";
+      errore("Password errata");
     }
   }
   else
   {
-    echo "EMAIL NON PRESENTE";
+    errore("Email non presente");
   }
+
+  /* Chiudo la connessiona al database */
+  mysqli_close($connessione);
 
 
  ?>

@@ -34,7 +34,7 @@
           </div>
 
 
-        <form  class="" method="post" name="signup-form" id="signup" action="signup_result.php">
+        <form  method="post" name="signup-form" id="signup" action="signup_result.php">
             <div class="form-group"> <!-- form-attributes----------------------->
 
 
@@ -90,7 +90,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label for="indirizzo">Indirizzo spedizione</label>
-                    <input name="indirizzo" type="text" class="form-control input-sm" id="indirizzo" autocomplete="off" required>
+                    <input name="indirizzo" type="text" class="form-control input-sm" id="indirizzo" autocomplete="off" placeholder="Via, Città, CAP .." required>
                 </div>
             </div>
 

@@ -76,7 +76,7 @@
   $connessione = connessione_db();
 
   //Ora controllo che non ci sia una mail uguale nel database con una query
-  $query = "SELECT id_utente FROM utente WHERE email = '$email'";
+  $query = "SELECT id_utente FROM utente WHERE email = '$email';";
 
   //Lancio la query e metto il risultato nel result_set
   $result_set = mysqli_query($connessione, $query);
@@ -100,7 +100,7 @@
   $crypt_password = md5($password);
 
   //Creo la query per l'inserimento dei dati
-  $query_inserimento = "INSERT INTO utente (nome, cognome, email, password, risposta_psw, indirizzo_spedizione) VALUES ('$nome','$cognome','$email','$crypt_password','$risposta_recupero_psw','$indirizzo')";
+  $query_inserimento = "INSERT INTO utente (nome, cognome, email, password, risposta_psw, indirizzo_spedizione) VALUES ('$nome','$cognome','$email','$crypt_password','$risposta_recupero_psw','$indirizzo');";
 
   //Eseguo la query
   $query_inserimento_ok = mysqli_query($connessione, $query_inserimento);

@@ -63,10 +63,17 @@
   $connessione = connessione_db();
 
   //Ora controllo che non ci sia una mail uguale nel database con una query
-  $query = "SELECT id FROM utente WHERE email = '$email'";
+  $query = "SELECT id_utente FROM utente WHERE email = '$email'";
 
-  //çancio la queri e metto il risultato nel result_set
+  //Lancio la query e metto il risultato nel result_set
   $result_set = mysqli_query($connessione, $query);
+
+  //Controllo se non ci sono errori nella query
+  if($result_set == false)
+  {
+    die(mysqli_error($connessione));
+  }
+
 
   //Se la query restituisce almeno una riga allora l'email è già presente
   if(mysqli_num_rows($result_set) > 0)

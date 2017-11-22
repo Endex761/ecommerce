@@ -29,14 +29,14 @@
           </div>
 
 
-        <form  class="" method="post" name="login-form" id="login" action="home.php">
+        <form  class="" method="post" name="login-form" id="login" action="login_result.php">
             <div class="form-group"> <!-- form-attributes----------------------->
 
             <!-- E-mail -->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label for="email">E-mail</label>
-                    <input type="email" class="form-control input-sm" id="email"  required>
+                    <input name="email" type="email" class="form-control input-sm" id="email"  required>
                 </div>
             </div>
 
@@ -44,7 +44,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group contact-field">
                     <label for="password">Password</label>
-                    <input  type="password"  class="form-control input-sm" id="password" minlength="8" maxlength="16"  required>
+                    <input name="password" type="password"  class="form-control input-sm" id="password" minlength="8" maxlength="16"  required>
                 </div>
             </div>
 
@@ -81,7 +81,7 @@
 
   <footer>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="footer">
-      <p>SR Furnitures Copyright @ 2017 Simon Pietro Romeo</p>
+      <p>SR Furnitures Copyright @ 2017 Simon Pietro Romeo & Dario Stella</p>
     </div>
   </footer>
 

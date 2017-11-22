@@ -5,8 +5,7 @@
     Il file contiene il codice necessario per inserire un nuovo utente all'interno del database
   */
 
-  include 'mysql.php';
-  include 'ip.php';
+  include 'libreria.php';
 
   //La variabile controlla se tutti i campi del form sono stati inizializati
   $formOk = true;
@@ -61,13 +60,13 @@
 
       if(!$formOk)
       {
-        echo "FORM NON COMPILATO CORRETTAMENTE";
+        errore("Form non compilato correttamente");
         die();
       }
     }
     else
     {
-      echo "ERRORE GENERICO";
+      errore("Errore generico");
       die();
     }
 
@@ -76,7 +75,7 @@
   $connessione = connessione_db();
 
   //Ora controllo che non ci sia una mail uguale nel database con una query
-  $query = "SELECT id_utente FROM utente WHERE email = '$email'";
+  $query = "SELECT id_utente FROM utente WHERE email = '$email';";
 
   //Lancio la query e metto il risultato nel result_set
   $result_set = mysqli_query($connessione, $query);
@@ -91,7 +90,7 @@
   //Se la query restituisce almeno una riga allora l'email è già presente
   if(mysqli_num_rows($result_set) > 0)
   {
-    echo "EMAIL GIA' PRESENTE";
+    errore("Email già presente");
     die();
   }
 
@@ -100,21 +99,17 @@
   $crypt_password = md5($password);
 
   //Creo la query per l'inserimento dei dati
-  $query_inserimento = "INSERT INTO utente (nome, cognome, email, password, risposta_psw, indirizzo_spedizione) VALUES ('$nome','$cognome','$email','$crypt_password','$risposta_recupero_psw','$indirizzo')";
+  $query_inserimento = "INSERT INTO utente (nome, cognome, email, password, risposta_psw, indirizzo_spedizione) VALUES ('$nome','$cognome','$email','$crypt_password','$risposta_recupero_psw','$indirizzo');";
 
   //Eseguo la query
   $query_inserimento_ok = mysqli_query($connessione, $query_inserimento);
 
   if(!$query_inserimento_ok)
-    echo "ERRORE INSERIMENO";
+    errore("Errore registrazione");
   else
     echo "INSERITA CORRETTAMENTE";
 
   //Chiudo la connessione al DATABASE_NAME
   mysqli_close($connessione);
-
-
-
-
 
  ?>

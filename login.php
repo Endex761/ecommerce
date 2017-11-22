@@ -57,7 +57,7 @@
               <!-- Bottone Accedi -->
               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                   <div class="form-group">
-                      <button type="submit" id="form-submit" class="btn btn-info">Accedi</button>
+                      <button type="submit" id="form-submit" class="btn btn-info ">Accedi</button>
                   </div>
               </div>
 

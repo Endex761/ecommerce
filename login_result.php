@@ -4,7 +4,7 @@
     Il file contiene il codice necessario per fare il login al sitoweb
   */
 
-  include 'libreia.php';
+  include 'libreria.php';
 
   //La variabile controlla se tutti i campi del form sono stati inizializati
   $formOk = true;

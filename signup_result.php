@@ -109,6 +109,7 @@
   else
     echo "INSERITA CORRETTAMENTE";
 
+
   //Chiudo la connessione al DATABASE_NAME
   mysqli_close($connessione);
 

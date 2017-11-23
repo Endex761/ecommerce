@@ -22,12 +22,11 @@
   define("DB_PASSWORD","darioesimone");
 
   /* Nome del database da usare*/
-  define("DATABASE_NAME","ecommerce");
+  define("DB_NAME","ecommerce");
 
 
   /*TEST AREA*/
-  $conn = connessione_db();
-  mysqli_close($conn);
+
 
   /*END TEST AREA*/
 
@@ -36,7 +35,7 @@
   function connessione_db()
   {
     //Provo a connettermi al database
-    $conn = mysqli_connect(DB_SERVERNAME,DB_USERNAME,DB_PASSWORD,DATABASE_NAME);
+    $conn = mysqli_connect(DB_SERVERNAME,DB_USERNAME,DB_PASSWORD,DB_NAME);
 
     //Testo la connessione
     if(!$conn)

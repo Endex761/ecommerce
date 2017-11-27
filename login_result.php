@@ -65,7 +65,7 @@
     //Confronto la password per vedere se corrisponde
     if($row['password'] == $crypt_password)
     {
-      echo "CONNESSO";
+      reindirizza("shop.php");
     }
     else
     {

@@ -6,16 +6,16 @@
 
 
 
-  function draw_prodotto($nome, $descrizione, $prezzo, $immagine)
+  function draw_prodotto($id_prodotto, $nome_prodotto, $descrizione, $prezzo, $disponibilita, $foto)
   {
     //Stampa un singolo prodotto
     echo "<div class='col-sm-4 col-xs-12'>";
     echo " <div class='panel panel-primary'>";
-    echo "  <div class='panel-heading text-center'>$nome</div>";
+    echo "  <div class='panel-heading text-center'>$nome_prodotto</div>";
     echo "  <div class='panel-body'>";
-    echo "      <img src='product_img/$immagine' class='img-responsive center-block' height='200px' width='200px'>";
+    echo "      <img src='product_img/$foto' class='img-responsive center-block' height='200px' width='200px'>";
     echo "      <hr />";
-    echo "      <h4> Descrizone:</h4>";
+    echo "      <h4>Descrizone:</h4>";
     echo "      <center>";
     echo "        <p>$descrizione</p>";
     echo "      </center>";
@@ -24,7 +24,7 @@
     echo "      <center>";
     echo "        <h3 style='color:green'>€ $prezzo </h3>";
     //echo "      <button class='btn-primary btn'>Compralo!</button>";
-    echo "        <button type='button' class='btn btn-primary'>";
+    echo "        <button type='button' class='btn btn-primary' onclick='location.href = \"carrello.php?add_product=$id_prodotto\"'>";
     echo "         <span class='glyphicon glyphicon-shopping-cart'></span> Aggiungi al carrello";
     echo "        </button>";
     echo "      </center>";

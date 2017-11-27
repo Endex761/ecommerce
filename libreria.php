@@ -57,6 +57,12 @@
     die();
   }
 
+  /*Funzione che reindirizza alla pagina passata come parametro*/
+  function reindirizza($pagina)
+  {
+    header("Location:" . "http://" . IP . "/ecommerce/" . "$pagina");
+  }
+
   /* Funzione definita da W3Schools per controllare gli input ed evitare exploit */
   function test_input($data)
   {

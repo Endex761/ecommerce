@@ -1,5 +1,5 @@
 <?php
-  /* libreria.php created by Simon Pietro 22/11/2015-01:14 */
+  /* libreria.php created by Simon Pietro 22/11/2017-01:14 */
   //Questo file contiene le funzioni per la gestione del database in mysqli
   //Questo file dovrà essere incluso per la gestione delle connessioni al db
 

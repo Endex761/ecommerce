@@ -128,7 +128,7 @@
   </section>
 
   <footer>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="footer">
+    <div class="col-xs-12 text-center" id="footer">
       <p>SR Furnitures Copyright @ 2017 Simon Pietro Romeo & Dario Stella</p>
     </div>
   </footer>

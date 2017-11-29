@@ -1,0 +1,7 @@
+CREATE TABLE Admin(
+  id_admin UNSIGNED INT  AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(50),
+  password VARCHAR(32)
+
+
+)

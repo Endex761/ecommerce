@@ -9,8 +9,8 @@
   //La variabile controlla se tutti i campi del form sono stati inizializati
   $formOk = true;
 
-  //Controllo se sto utlizzando il metodo POST e acquisisco i dati dal form
-  //Mi assicuro che i dati sono stati inizializati
+  //Controllo se sto utilizzando il metodo POST e acquisisco i dati dal form
+  //Mi assicuro che i dati sono stati inizializzati
   //Se i dati sono inizializzati controllo che non ci sia codice malevolo con la funzione test_input
   if($_SERVER["REQUEST_METHOD"] == "POST")
   {

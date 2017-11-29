@@ -16,7 +16,7 @@
     <div class = "col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12" style="border: 2px solid grey; border-radius:10px; background:#F9F9F9;">
 
   <h2>Login per l'amministratore</h2>
-  <form action="/action_page.php">
+  <form action="admin_result.php"  method="post">
 
     <div class="form-group">
       <label for="email">Email:</label>

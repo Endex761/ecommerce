@@ -5,7 +5,6 @@
   // grafiche per il sito come title, footer, navbar ecc
 
 
-
   function draw_prodotto($id_prodotto, $nome_prodotto, $descrizione, $prezzo, $disponibilita, $foto)
   {
     //Stampa un singolo prodotto
@@ -40,7 +39,7 @@
     echo "    <span class='text-muted'>SR Furnitures Copyright @ 2017 Simon Pietro Romeo & Dario Stella</span>";
     echo "  </div>";
     echo "</footer>";
-  }  
+  }
 
 
   function include_bootstrap()

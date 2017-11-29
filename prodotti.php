@@ -1,6 +1,7 @@
 <?php
-	
 
+	include "libreria.php";
+	//Creo la connessione al database
 	$connessione = connessione_db();
 ?>
 
@@ -29,19 +30,53 @@
 			      </tr>
 			    </thead>
 			    <tbody>
-			    	<tr>
-			        	<td>1</td>
-			        	<td>Comodino</td>
-			        	<td>Ottimo comodino</td>
-			        	<td>20.5</td>
-			        	<td>5</td>
-			        	<td>1.jpeg</td>
-			      	</tr>
+
+						<!--<tr>
+			        <td>id_prodotto</td>
+			        <td>nome_prodotto</td>
+			        <td>descrizione</td>
+			        <td>prezzo</td>
+			        <td>disponbilità</td>
+			        <td>foto</td>
+			      </tr>-->
+
 			    	<?php
-			    		
+			    		//Creo la query per richiedere i prodotti all'interno del database
+							$query = "SELECT * FROM prodotto;";
+
+							//Lancio la query e metto il risultato nel result_set
+							$result_set = mysqli_query($connessione, $query);
+
+							//Controllo se non ci sono errori nella query
+							if($result_set == false)
+							{
+								die(mysqli_error($connessione));
+							}
+
+							//Se la query restituisce almeno una riga
+						  if(mysqli_num_rows($result_set) > 0 )
+						  {
+						    //Faccio il fetch dell'array associativo
+						    //$row è un array associativo contente una tupla che descrive un prodotto
+						    while($row = mysqli_fetch_assoc($result_set))
+								{
+									//Stampo gli elementi di una riga
+									echo "<tr>";
+									foreach ($row as $value)
+									{
+											echo "<td>$value</td>";
+									}
+									echo "</tr>";
+								}
+							}
+
 			    	?>
 			    </tbody>
 			</table>
 		</div>
 	</body>
 </html>
+
+<?php
+	mysqli_close($connessione);
+ ?>

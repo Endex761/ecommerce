@@ -32,4 +32,21 @@
     echo "  </div>";
     echo "</div>";
   }
+
+  function draw_footer()
+  {
+    echo "<footer class='footer'>";
+    echo "  <div class='col-xs-12 text-center' style='background:#F9F9F9; padding:10px;'>";
+    echo "    <span class='text-muted'>SR Furnitures Copyright @ 2017 Simon Pietro Romeo & Dario Stella</span>";
+    echo "  </div>";
+    echo "</footer>";
+  }  
+
+
+  function include_bootstrap()
+  {
+    echo "<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>";
+    echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>";
+    echo "<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>";
+  }
   ?>

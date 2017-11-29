@@ -1,11 +1,15 @@
+<?php
+
+  include 'libreria.php';
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Rende responsive il tutto-->
     <!--<link rel="stylesheet" type="text/css" href="css/basic.css">-->
     <!--<link rel="stylesheet" type="text/css" href="css/navbar.css">-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <?php include_bootstrap(); ?>
 
   </head>
   <body>
@@ -21,7 +25,7 @@
         </div>
 
         <!-- col-*-offset-* per centrare il contenuto -->
-        <div class="col-lg-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12" style="border: 2px solid grey; border-radius: 10px; background:#F9F9F9;">
+        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12" style="border: 2px solid grey; border-radius: 10px; background:#F9F9F9;">
 
 
           <div class="col-lg-8 col-md-8 col-sm-8 col-xm-12">
@@ -79,11 +83,14 @@
   </div><!--content-->
   </section>
 
-  <footer>
+  <?php
+    draw_footer();
+  ?>
+  <!--<footer>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="footer">
       <p>SR Furnitures Copyright @ 2017 Simon Pietro Romeo & Dario Stella</p>
     </div>
-  </footer>
+  </footer> -->
 
   <script type="text/javascript" src="js/functions.js"></script>
   </body>

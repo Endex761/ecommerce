@@ -3,6 +3,7 @@
   //Questo file contiene le funzioni per la gestione del database in mysqli
   //Questo file dovrà essere incluso per la gestione delle connessioni al db
 
+  include "design.php";
 
   /*Costante IP che consente il reindirizzamento per un corretto funzionamento delle sessioni.*/
   //define("IP","localhost:8080");

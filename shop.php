@@ -130,11 +130,11 @@
       </div>
     </div>
 
-    <footer style="background-colo: grey;">
+  <!--  <footer style="background-colo: grey;">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="footer">
         <p>SR Furnitures Copyright @ 2017 Simon Pietro Romeo & Dario Stella</p>
       </div>
-    </footer>
+    </footer> -->
   </body>
 </html>
 

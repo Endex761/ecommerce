@@ -1,6 +1,6 @@
 <?php
 
-
+  include 'libreria.php';
  ?>
 
 <!DOCTYPE html>
@@ -9,8 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Rende responsive il tutto-->
     <!--<link rel="stylesheet" type="text/css" href="css/basic.css">-->
     <!--<link rel="stylesheet" type="text/css" href="css/navbar.css">-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <?php include_bootstrap(); ?>
 
   </head>
   <body>
@@ -126,12 +125,21 @@
       </div>
   </div><!--content-->
   </section>
+  
+  <?php
+    draw_footer();
+  ?>
 
-  <footer>
+  <!--<footer>
     <div class="col-xs-12 text-center" id="footer">
       <p>SR Furnitures Copyright @ 2017 Simon Pietro Romeo & Dario Stella</p>
     </div>
-  </footer>
+  </footer>-->
+<!--  <footer class="footer">
+      <div class="col-xs-12 text-center" style="background:#F9F9F9; padding:10px;">
+        <span class="text-muted">SR Furnitures Copyright @ 2017 Simon Pietro Romeo & Dario Stella</span>
+      </div>
+  </footer> -->
 
   <script type="text/javascript" src="js/functions.js"></script>
   </body>

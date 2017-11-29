@@ -74,10 +74,13 @@
         </article>-->
       </section>
     </div>
+    <?php
+      draw_footer();
+    ?>
 
-      <footer class="col-md-12">
+    <!--  <footer class="col-md-12">
         <p>SR Furnitures Copyright @ 2017 Simon Pietro Romeo</p>
-      </footer>
+      </footer> -->
 
 
 

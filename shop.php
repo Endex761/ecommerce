@@ -102,6 +102,8 @@
             //Controllo se ci sono righe nel risultato
             if(mysqli_num_rows($result_set) > 0)
             {
+              $counter = 0;
+              echo "<div class='row'>";
               //Faccio il fetch dell'array associativo
               while($row = mysqli_fetch_assoc($result_set))
               {
@@ -113,6 +115,11 @@
                 $foto =           $row['foto'];
                 //stampo il prodotto
                 draw_prodotto($id_prodotto, $nome_prodotto, $descrizione, $prezzo, $disponibilita, $foto);
+                $counter++;
+                if($counter%3 == 0)
+                  echo "</div><div class='row'>";
+                if($counter == 8)
+                  echo "</div>";
               }
 
             }

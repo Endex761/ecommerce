@@ -7,12 +7,13 @@
 
   function draw_prodotto($id_prodotto, $nome_prodotto, $descrizione, $prezzo, $disponibilita, $foto)
   {
+    //$disponibilita =0;
     //Stampa un singolo prodotto
     echo "<div class='col-sm-4 col-xs-12'>";
     echo " <div class='panel panel-primary'>";
     echo "  <div class='panel-heading text-center'>$nome_prodotto</div>";
     echo "  <div class='panel-body'>";
-    echo "      <img src='product_img/$foto' class='img-responsive center-block' height='200px' width='200px'>";
+    echo "      <a href='product_img/$foto'><img src='product_img/$foto' class='img-responsive center-block' height='200px' width='200px'></a>";
     echo "      <hr />";
     echo "      <h4>Descrizone:</h4>";
     echo "      <center>";
@@ -21,7 +22,10 @@
     echo "    </div>";
     echo "    <div class='panel-footer'>";
     echo "      <center>";
-    echo "        <h3 style='color:green'>€ $prezzo </h3>";
+    if($disponibilita>0)
+      echo "       <h3 style='color:green'>€ $prezzo </h3>";
+    else
+      echo "       <h3 style='color:red'>Prodotto non disponibile</h3>";
     //echo "      <button class='btn-primary btn'>Compralo!</button>";
     echo "        <button type='button' class='btn btn-primary' onclick='location.href = \"carrello.php?add_product=$id_prodotto\"'>";
     echo "         <span class='glyphicon glyphicon-shopping-cart'></span> Aggiungi al carrello";

@@ -61,12 +61,11 @@
     $check = getimagesize($_FILES["foto"]["tmp_name"]);
     if($check != false)
     {
-        echo "File is an image - " . $check["mime"] . ".";
         $uploadOk = true;
     }
     else
     {
-        echo "File is not an image.";
+        errore("Il file non è una foto.")
         $uploadOk = false;
     }
   }

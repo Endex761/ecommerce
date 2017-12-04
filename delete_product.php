@@ -1,7 +1,7 @@
 <?php
   /* login_result.php created Simon Pietro 03/12/2017 - 16:05 */
   /*
-    Il file contiene il codice necessario per eliminare un prodotto al database
+    Il file contiene il codice necessario per eliminare un prodotto al database e la relativa immagine
   */
 
   include 'libreria.php';
@@ -9,7 +9,6 @@
   //Se mi viene passato un id
   if(isset($_GET['id']))
   {
-
     //Prendo l'id del Prodotto
     $id_prodotto = $_GET['id'];
 
@@ -30,9 +29,21 @@
 
     mysqli_close($connessione);
 
+    //Elimino la foto del Prodotto
+    $base_dir = "product_img/";
+
+    //La funzione unlink permette di eliminare un file locale
+    if(!unlink($base_dir . $_GET['id'] . ".jpg"))
+    {
+      errore("Foro non eliminata.");
+    }
+
+    //Infine reindirizzo l'admin alla pagina dei prodotti
     reindirizza("prodotti.php");
   }
   else
   {
     errore("Errore generale.");
   }
+
+  ?>

@@ -12,38 +12,12 @@
     <!--<link rel="stylesheet" type="text/css" href="css/basic.css">-->
     <!--<link rel="stylesheet" type="text/css" href="css/navbar.css">-->
     <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <?php include_bootstrap(); ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?php include_bootstrap(); ?>
   </head>
   <body>
 
-
-      <!-- Navbar -->
-    <!--  <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-
-          <div class="navbar-header">
-            <a class="navbar-brand" href="shop.php">SF Furnitures</a>
-          </div>
-
-          <form class="col-xs-6 navbar-form navbar-left">
-            <div class="input-group">
-              <input  type="text" class="form-control" placeholder="Mobili, Comodini, Sedie ..">
-              <div class="input-group-btn">
-                <button class="btn btn-default" type="submit">Cerca</button>
-              </div>
-            </div>
-          </form>
-
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Simon Pietro </a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Carrello</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-          </ul>
-        </div>
-      </nav> -->
-
-      <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse">
     <div class="">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -66,7 +40,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#"><span class="glyphicon glyphicon-user"></span> Simon Pietro </a></li>
-          <li><a href="carrello.php"><span class="glyphicon glyphicon-shopping-cart"></span> Carrello <span class="badge">5</span></a></li>
+          <li><a href="carrello.php"><span class="glyphicon glyphicon-shopping-cart"></span> Carrello <span class="badge"><?php echo count_carrello() ?></span></a></li>
           <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
       </div>
@@ -116,31 +90,25 @@
                 //stampo il prodotto
                 draw_prodotto($id_prodotto, $nome_prodotto, $descrizione, $prezzo, $disponibilita, $foto);
                 $counter++;
+
+                //Ogni tre prodotti chiudo una riga.
                 if($counter%3 == 0)
                   echo "</div><div class='row'>";
+
+                //Per l'ultimo prodotto chiudo il  div
                 if($counter == 8)
                   echo "</div>";
               }
 
             }
-
-
-
           ?>
         </div> <!-- row -->
-
-
       </div>
     </div>
     <?php
       draw_footer();
     ?>
 
-  <!--  <footer style="background-colo: grey;">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="footer">
-        <p>SR Furnitures Copyright @ 2017 Simon Pietro Romeo & Dario Stella</p>
-      </div>
-    </footer> -->
   </body>
 </html>
 

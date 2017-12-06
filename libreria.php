@@ -9,7 +9,8 @@
   //define("IP","localhost:8080");
   define("IP","2.237.61.241:8080");
 
-
+  /*COSTANTE PER LA SCADENZA DEI COOKIE */
+  define("GIORNI_SCADENZA_CARRELLO",7);
 
   /*COSTANTI PER LA CONNESSIONE*/
 
@@ -73,6 +74,26 @@
     return $data;
   }
 
+  /* Funzione che ritorna il numero di articoli all'interno del carrello */
+  function count_carrello()
+  {
+    if(isset($_COOKIE['carrello']))
+    {
+      //Prendo il cookie e lo assegno al carrello
+      $carrello = unserialize($_COOKIE['carrello']);
+      $count = 0;
+      foreach ($carrello as $value)
+      {
+        $count += $value;
+      }
 
+      return $count;
+    }
+    else
+    {
+      //Altrimenti ritorno 0
+      return 0;
+    }
+  }
 
  ?>

@@ -4,6 +4,7 @@
     Il file contiene il codice necessario per eliminare un prodotto al database e la relativa immagine
   */
 
+  //Includo la libreria con le funzioni da me definite
   include 'libreria.php';
 
   //Se mi viene passato un id
@@ -27,6 +28,7 @@
       die(mysqli_error($connessione));
     }
 
+    //Chiudo la connessione
     mysqli_close($connessione);
 
     //Elimino la foto del Prodotto

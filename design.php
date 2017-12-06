@@ -7,8 +7,11 @@
 
   function draw_prodotto($id_prodotto, $nome_prodotto, $descrizione, $prezzo, $disponibilita, $foto)
   {
-    //$disponibilita =0;
     //Stampa un singolo prodotto
+    $disabled = "";
+    $script = "location.href = \"carrello.php?add=$id_prodotto\"";
+    //$disponibilita = 0;
+
     echo "<div class='col-sm-4 col-xs-12'>";
     echo " <div class='panel panel-primary'>";
     echo "  <div class='panel-heading text-center'>$nome_prodotto</div>";
@@ -22,12 +25,17 @@
     echo "    </div>";
     echo "    <div class='panel-footer'>";
     echo "      <center>";
-    if($disponibilita>0)
-      echo "       <h3 style='color:green'>€ $prezzo </h3>";
-    else
+
+    if($disponibilita==0)
+    {
       echo "       <h3 style='color:red'>Prodotto non disponibile</h3>";
-    //echo "      <button class='btn-primary btn'>Compralo!</button>";
-    echo "        <button type='button' class='btn btn-primary' onclick='location.href = \"carrello.php?add_product=$id_prodotto\"'>";
+      $disabled = "disabled"; //Se non dispobile disabilita il pulzante di acquisto
+      $script = ""; // E elimina il reindirizzamento
+    }
+    else
+      echo "       <h3 style='color:green'>€ $prezzo </h3>";
+
+    echo "         <button type='button' class='btn btn-primary $disabled' onclick='$script'>";
     echo "         <span class='glyphicon glyphicon-shopping-cart'></span> Aggiungi al carrello";
     echo "        </button>";
     echo "      </center>";

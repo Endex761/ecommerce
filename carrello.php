@@ -1,5 +1,6 @@
 <?php
 
+  //Questo file permette la gestione del carrello
 
   include 'libreria.php';
 
@@ -185,7 +186,7 @@
              <h2 style="color:red;">€<?php echo $totale ?></h2>
            </div>
            <div "col-xs-12">
-             <a href="#"><button type="button" class="btn btn-success <?php if(!$count_carrello) echo 'disabled' ?>"">Procedi all'aquisto!</button></a>
+             <a href="acquisto.php"><button type="button" class="btn btn-success <?php if(!$count_carrello) echo 'disabled' ?>">Procedi all'aquisto!</button></a>
            </div>
            <hr />
            <div "col-xs-12" style="padding:10px;">

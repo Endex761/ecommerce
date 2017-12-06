@@ -9,7 +9,7 @@
 
   //Seleziona 9 prodotti casuali da mostrare nello shop
   $search_query = "SELECT * FROM prodotto WHERE disponibilita > 0 ORDER BY rand() LIMIT 9;";
-
+  $ricerca = "";
 
   if($_SERVER["REQUEST_METHOD"] == "GET")
   {
@@ -19,6 +19,7 @@
         $search_query = "SELECT * FROM prodotto WHERE disponibilita > 0 AND (nome_prodotto LIKE '%{$ricerca}%' OR descrizione LIKE '%{$ricerca}%');";
     }
   }
+
 
 
 
@@ -49,7 +50,7 @@
         <ul class="nav navbar-nav">
           <form class="col-xs-6 navbar-form navbar-left" action="shop.php" method="get">
             <div class="input-group">
-              <input name="ricerca" type="text" class="form-control" placeholder="Mobili, Comodini, Sedie ..">
+              <input name="ricerca" type="text" class="form-control" value="<?php echo $ricerca ?>" placeholder="Mobili, Comodini, Sedie .." >
               <div class="input-group-btn">
                 <button class="btn btn-default" type="submit">Cerca</button>
               </div>

@@ -10,7 +10,7 @@
   //Seleziona 9 prodotti casuali da mostrare nello shop
   $search_query = "SELECT * FROM prodotto WHERE disponibilita > 0 ORDER BY rand() LIMIT 9;";
 
-  
+
   if($_SERVER["REQUEST_METHOD"] == "GET")
   {
     if(isset($_GET['ricerca']))
@@ -116,7 +116,10 @@
                 if($counter == 9)
                   echo "</div>";
               }
-
+            }
+            else
+            {
+              echo "<h3 class='text-center'> Nessun risultato. </h3>";
             }
           ?>
         </div> <!-- row -->

@@ -1,5 +1,0 @@
-CREATE TABLE Carrello(
-  id_carrello UNSIGNED INT  AUTO_INCREMENT PRIMARY KEY,
-  id_prodotto int not null references Prodotto(id_prodotto),
-  quantita int,
-  id_utente int not null references Utente(id_utente));

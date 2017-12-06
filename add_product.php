@@ -65,17 +65,18 @@
     }
     else
     {
-        errore("Il file non è una foto.")
         $uploadOk = false;
+        errore("Il file non è una foto.");
+
     }
   }
 
   // Controlla se il file esiste
-  if (file_exists($target_file))
+  /*if (file_exists($target_file))
   {
       errore("File già presente.");
       $uploadOk = false;
-  }
+  }*/
 
   // Verifica il formato del file
   if($imageFileType != "jpg" && $imageFileType != "jpeg")

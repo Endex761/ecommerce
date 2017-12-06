@@ -5,6 +5,24 @@
   //Apro la connessione per poi utilizzarla nelle query
   $connessione = connessione_db();
 
+  /*QUERY DI RICERCA PRODOTTI */
+
+  //Seleziona 9 prodotti casuali da mostrare nello shop
+  $search_query = "SELECT * FROM prodotto WHERE disponibilita > 0 ORDER BY rand() LIMIT 9;";
+
+  
+  if($_SERVER["REQUEST_METHOD"] == "GET")
+  {
+    if(isset($_GET['ricerca']))
+    {
+        $ricerca = test_input($_GET['ricerca']);
+        $search_query = "SELECT * FROM prodotto WHERE disponibilita > 0 AND (nome_prodotto LIKE '%{$ricerca}%' OR descrizione LIKE '%{$ricerca}%');";
+    }
+  }
+
+
+
+
  ?>
 <html>
   <head>
@@ -29,9 +47,9 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <form class="col-xs-6 navbar-form navbar-left">
+          <form class="col-xs-6 navbar-form navbar-left" action="shop.php" method="get">
             <div class="input-group">
-              <input  type="text" class="form-control" placeholder="Mobili, Comodini, Sedie ..">
+              <input name="ricerca" type="text" class="form-control" placeholder="Mobili, Comodini, Sedie ..">
               <div class="input-group-btn">
                 <button class="btn btn-default" type="submit">Cerca</button>
               </div>
@@ -61,11 +79,10 @@
         <div class="row">
 
           <?php
-            //Selezioni 9 prodotti casuali da mostrare nello shop
-            $query = "SELECT * FROM prodotto WHERE disponibilita > 0 ORDER BY rand() LIMIT 9;";
+
 
             //Invio la query al db
-            $result_set = mysqli_query($connessione, $query);
+            $result_set = mysqli_query($connessione, $search_query);
 
             //Controllo se non ci sono errori nella query
             if($result_set == false)
@@ -96,7 +113,7 @@
                   echo "</div><div class='row'>";
 
                 //Per l'ultimo prodotto chiudo il  div
-                if($counter == 8)
+                if($counter == 9)
                   echo "</div>";
               }
 

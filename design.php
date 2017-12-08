@@ -46,13 +46,13 @@
 
   function draw_prodotto_carrello($id_prodotto, $nome_prodotto, $prezzo, $disponibilita, $foto, $quantita)
   {
-    echo "<div class='col-xs-12' style='background-color:#F9F9F9; padding:5px; margin-bottom:5px;'>";
+    echo "<div class='col-xs-12 text-center' style='background-color:#F9F9F9; padding:5px; margin-bottom:5px;'>";
 
-    echo "  <div class='col-xs-3'>";
+    echo "  <div class='col-sm-3 col-xs-12'>";
     echo "    <a href='product_img/$foto'><img class='img-thumbnail' src='product_img/$foto' height='150px' width='150px'></a>";
     echo "  </div>";
 
-    echo "  <div class='col-xs-6'>";
+    echo "  <div class='col-sm-6 col-xs-12'>";
     echo "    <div class='col-xs-12'>";
     echo "     <h3 class='text-primary'> $nome_prodotto </h3>";
     echo "    </div>";
@@ -62,7 +62,7 @@
     echo "    </div>";
     echo "  </div>";
 
-    echo "  <div class='col-xs-3 text-center' >";
+    echo "  <div class='col-sm-3 col-xs-12'>";
     echo "    <div class='col-xs-12'>";
     echo "      <h4>Prezzo</h4>";
     echo "      <h3 style='color:green;'>€$prezzo</h3>";

@@ -240,7 +240,7 @@
       </div>
 
     <!-- Questo script risolve il bug di aggiungere più prodotti al refresh della pagina -->
-    <script type="text/javascript"> window.onload = function () { history.replaceState('', '', 'carrello.php'); } </script>
+    <script> window.onload = function () { history.replaceState('', '', 'carrello.php'); } </script>
   </div><!--content-->
   </body>
 

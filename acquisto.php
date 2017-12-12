@@ -58,6 +58,7 @@
      <!--<link rel="stylesheet" type="text/css" href="css/navbar.css">-->
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1">
+     <script src="js/functions.js"></script>
      <?php include_bootstrap(); ?>
    </head>
    <body>
@@ -89,18 +90,20 @@
            <div class="col-sm-9 col-xs-12">
              <input type="text" class="form-control" value="Via Ciaculli 14, Palermo, Italia.">
              <br>
+             <label onclick="disableEnable('fatturazione');"><input id="checkbox" type="checkbox" checked> Utilizza questo indirizzo come indirizzo di fatturazione.</label>
+             <br>
              <a>Cambia indirizzo di spedizione predefinito</a>
            </div>
          </div>
 
-         <div class="row" style="padding:10px;">
+         <div id="fatturazione" class="row" style="padding:10px;">
            <div class="col-sm-3 col-xs-12">
              <h4>Indirizzo fatturazione:</h4>
            </div>
            <div class="col-sm-9 col-xs-12">
-             <input type="text" class="form-control" value="Via Ciaculli 14, Palermo, Italia.">
+             <input type="text" class="form-control" value="Via Ciaculli 14, Palermo, Italia." >
              <br>
-             <label><input type="checkbox"> Utilizza questo indirizzo come indirizzo di fatturazione.</label>
+
            </div>
          </div>
        </div>
@@ -113,31 +116,75 @@
        <div class="col-sm-9 col-xs-12" style="border-radius: 5px; padding-top:5px; background-color:#F9F9F9">
          <div class="col-sm-3 col-xs-12">
            <h4>Metodo Pagamento:</h4>
+           <h6>(Le tue carte)</h6>
          </div>
-         <div class="col-sm-9 col-xs-12">
 
-              <div class="col-sm-9 col-xs-12" class="form-control">
+         <div class="col-sm-9 col-xs-12"> <!-- QUI DENTRO VANNO LE CARTE -->
+           <form>
+
+             <div class="col-sm-9 col-xs-12" class="form-control" style="margin-bottom:20px;">
+
+               <div class="form-group">
+                  <label for="indirizzo">Carta</label>
+                  <label class="pull-right" for="seleziona">Seleziona</label><input class="pull-right" type="radio" name="card" checked>
+                  <input type="text" class="form-control" id="denominazione" value="Mastercard" disabled>
+             </div>
+             <div class="form-group">
+                 <label for="indirizzo">Intestatario</label>
+                 <input name="indirizzo" type="text" class="form-control" id="intestatario" value="Simon Pietro Romeo" disabled>
+             </div>
+             <div class="row">
+               <div class="col-sm-9 col-xs-8">
+                 <div class="form-group">
+                     <label for="indirizzo">Numero Carta</label>
+                     <input name="indirizzo" type="text" class="form-control" id="mese-scadenza" value="**** **** **** 7593" disabled>
+                 </div>
+               </div>
+               <div class="col-sm-3 col-xs-4">
+                 <div class="form-group">
+                     <label for="indirizzo">CVV</label>
+                     <input name="indirizzo" type="text" class="form-control" id="anno-scadenza" value="2020" disabled>
+                 </div>
+               </div>
+             </div>
+             <div class="row">
+               <div class="col-xs-6">
+                 <div class="form-group">
+                     <label for="indirizzo">Mese Scadenza</label>
+                     <input name="indirizzo" type="text" class="form-control" id="mese-scadenza" value="11" disabled>
+                 </div>
+               </div>
+               <div class="col-xs-6">
+                 <div class="form-group">
+                     <label for="indirizzo">Anno Scadenza</label>
+                     <input name="indirizzo" type="text" class="form-control" id="anno-scadenza" value="2020" disabled>
+                 </div>
+               </div>
+             </div>
+           </div>
+
+
+              <div class="col-sm-9 col-xs-12" class="form-control" style="margin-bottom:10px;">
+
                 <div class="form-group">
-                    <label for="indirizzo">Carta</label>
-                    <select class="form-control">
-                      <option>Mastercard</option>
-                    </select>
+                    <label for="indirizzo">Carta</label><label class="pull-right" for="indirizzo">Seleziona</label><input class="pull-right" type="radio" name="card">
+                    <input type="text" class="form-control" id="denominazione" value="Mastercard" disabled>
                 </div>
                 <div class="form-group">
                     <label for="indirizzo">Intestatario</label>
-                    <input name="indirizzo" type="text" class="form-control" id="intestatario" value="Simon Pietro Romeo">
+                    <input name="indirizzo" type="text" class="form-control" id="intestatario" value="Simon Pietro Romeo" disabled>
                 </div>
                 <div class="row">
                   <div class="col-sm-9 col-xs-8">
                     <div class="form-group">
                         <label for="indirizzo">Numero Carta</label>
-                        <input name="indirizzo" type="text" class="form-control" id="mese-scadenza" value="**** **** **** 7593">
+                        <input name="indirizzo" type="text" class="form-control" id="mese-scadenza" value="**** **** **** 7593" disabled>
                     </div>
                   </div>
                   <div class="col-sm-3 col-xs-4">
                     <div class="form-group">
                         <label for="indirizzo">CVV</label>
-                        <input name="indirizzo" type="text" class="form-control" id="anno-scadenza" value="2020">
+                        <input name="indirizzo" type="text" class="form-control" id="anno-scadenza" value="2020" disabled>
                     </div>
                   </div>
                 </div>
@@ -145,19 +192,21 @@
                   <div class="col-xs-6">
                     <div class="form-group">
                         <label for="indirizzo">Mese Scadenza</label>
-                        <input name="indirizzo" type="text" class="form-control" id="mese-scadenza" value="11">
+                        <input name="indirizzo" type="text" class="form-control" id="mese-scadenza" value="11" disabled>
                     </div>
                   </div>
                   <div class="col-xs-6">
                     <div class="form-group">
                         <label for="indirizzo">Anno Scadenza</label>
-                        <input name="indirizzo" type="text" class="form-control" id="anno-scadenza" value="2020">
+                        <input name="indirizzo" type="text" class="form-control" id="anno-scadenza" value="2020" disabled>
                     </div>
                   </div>
                 </div>
               </div>
-         </div>
+            </form>
+         </div> <!-- FINE CARTE -->
        </div>
+
 
 
 

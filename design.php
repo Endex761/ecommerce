@@ -94,6 +94,89 @@
     echo "</footer>";
   }
 
+  function draw_navbar($ricerca, $user, $count_carrello)
+  {
+    //Ricerca è il valore della precendente ricerca da mostrsre nel input
+    //User è il nome e il cognome dell'utente loggato da stampare nella nav
+    //Count_carrello è il numero badge accanto al carrello e indica il numero di elementi nel carello
+    echo "<nav class='navbar navbar-inverse'>";
+    echo "  <div class=''>";
+    echo "    <div class='navbar-header'>";
+    echo "      <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#myNavbar'>";
+    echo "        <span class='icon-bar'></span>";
+    echo "        <span class='icon-bar'></span>";
+    echo "        <span class='icon-bar'></span>";
+    echo "      </button>";
+    echo "      <a class='navbar-brand' href='shop.php'>SR Furnitures</a>";
+    echo "    </div>";
+    echo "    <div class='collapse navbar-collapse' id='myNavbar'>";
+    echo "      <ul class='nav navbar-nav'>";
+    echo "        <form class='navbar-form navbar-left' id='navBarSearchForm'  action='shop.php' method='get'>";
+    echo "          <div class='input-group'>";
+    echo "            <input name='ricerca' type='text' class='form-control' value='$ricerca' placeholder='Mobili, Comodini, Sedie ..' >";
+    echo "            <div class='input-group-btn'>";
+    echo "              <button class='btn btn-default' type='submit'>Cerca</button>";
+    echo "            </div>";
+    echo "          </div>";
+    echo "        </form>";
+    echo "      </ul>";
+    echo "      <ul class='nav navbar-nav navbar-right'>";
+    echo "        <li><a href='#'><span class='glyphicon glyphicon-user'></span> $user </a></li>";
+    echo "        <li><a href='carrello.php'><span class='glyphicon glyphicon-shopping-cart'></span> Carrello <span class='badge'> $count_carrello </span></a></li>";
+    echo "        <li><a href='logout.php'><span class='glyphicon glyphicon-log-out'></span> Logout</a></li>";
+    echo "      </ul>";
+    echo "    </div>";
+    echo "  </div>";
+    echo "</nav>";
+
+  }
+
+  function draw_carta($id_carta, $intestatario, $numero_carta, $mese_scadenza, $anno_scadenza, $codice_sicurezza, $denominazione)
+  {
+    //Mostra solo gli ultimi 4 numeri del numero
+    $numero_carta = substr($numero_carta, 15);
+
+    echo "<div class='col-sm-9 col-xs-12' class='form-control' style='margin-bottom:20px;'>";
+    echo "  <div class='form-group'>";
+    echo "    <label for='indirizzo'>Carta</label>";
+    echo "    <label class='pull-right' for='seleziona'>Seleziona</label><input class='pull-right' type='radio' name='card' value='$id_carta' checked>";
+    echo "    <input type='text' class='form-control' id='denominazione' value='$denominazione' disabled>";
+    echo "  </div>";
+    echo "  <div class='form-group'>";
+    echo "    <label for='indirizzo'>Intestatario</label>";
+    echo "    <input name='indirizzo' type='text' class='form-control' id='intestatario' value='$intestatario' disabled>";
+    echo "  </div>";
+    echo "  <div class='row'>";
+    echo "    <div class='col-sm-9 col-xs-8'>";
+    echo "      <div class='form-group'>";
+    echo "        <label for='indirizzo'>Numero Carta</label>";
+    echo "        <input name='indirizzo' type='text' class='form-control' id='numero-carta' value='**** **** **** $numero_carta' disabled>";
+    echo "      </div>";
+    echo "    </div>";
+    echo "    <div class='col-sm-3 col-xs-4'>";
+    echo "      <div class='form-group'>";
+    echo "        <label for='indirizzo'>CVV</label>";
+    echo "        <input name='indirizzo' type='text' class='form-control' id='codice-sicurezza' value='$codice_sicurezza' disabled>";
+    echo "      </div>";
+    echo "    </div>";
+    echo "  </div>";
+    echo "  <div class='row'>";
+    echo "    <div class='col-xs-6'>";
+    echo "      <div class='form-group'>";
+    echo "        <label for='indirizzo'>Mese Scadenza</label>";
+    echo "        <input name='indirizzo' type='text' class='form-control' id='mese-scadenza' value='$mese_scadenza' disabled>";
+    echo "      </div>";
+    echo "    </div>";
+    echo "    <div class='col-xs-6'>";
+    echo "      <div class='form-group'>";
+    echo "        <label for='indirizzo'>Anno Scadenza</label>";
+    echo "        <input name='indirizzo' type='text' class='form-control' id='anno-scadenza' value='$anno_scadenza' disabled>";
+    echo "      </div>";
+    echo "    </div>";
+    echo "  </div>";
+    echo "</div>";
+  }
+
 
   function include_bootstrap()
   {
@@ -101,4 +184,6 @@
     echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>";
     echo "<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>";
   }
+
+
   ?>

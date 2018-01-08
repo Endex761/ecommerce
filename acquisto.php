@@ -1,6 +1,16 @@
 <?php
   include 'libreria.php';
 
+  /*Avvio la sessione e controllo che il login sia stato effettuato*/
+  session_start();
+
+  if(!isset($_SESSION['id_utente']))
+    reindirizza("login.php?=not-logged");
+
+  /*   */
+
+
+
   $connessione = connessione_db();
 
   if(isset($_COOKIE['carrello']))
@@ -61,7 +71,10 @@
      <script src="js/functions.js"></script>
      <?php include_bootstrap(); ?>
    </head>
-   <body>
+   <body onload="disableEnable('fatturazione');">
+     <!-- al caricamento uso la funzione disableEnable per disattivare a prescindere il box dell'indirizzo di fatturazione-->
+     <form action="acquistato.php">
+       <!-- il form comprende la carta selezionata, gli indirizzi di spedizione e fatturazione e il bottone conferma di submit -->
 
      <div class="container-fluid">
 
@@ -69,6 +82,7 @@
          <h1> Spedizione & Pagamento </h1>
        </div>
        <!-- CONFERMA -->
+
        <div class="col-sm-3 col-xs-12 pull-right text-center" style="background-color:#F3F3F3; padding-bottom:5px; border-radius: 5px;">
          <div "col-xs-12">
            <h3>Totale <a href="carrello.php">(<?php echo $count_carrello ?> prodotti)</a></h3>
@@ -77,18 +91,43 @@
            <h2 style="color:red;">€<?php echo $totale ?></h2>
          </div>
          <div "col-xs-12">
-           <a href="acquisto.php"><button type="button" class="btn btn-success <?php if(!$count_carrello) echo 'disabled' ?>">Conferma</button></a>
+           <button type="submit" class="btn btn-success <?php if(!$count_carrello) echo 'disabled' ?>">Conferma</button>
          </div>
        </div>
 
        <!-- SPEDIZIONE -->
+
+       <?php
+        //Prendo l'indirizzo di spedizione
+        $id_utente = $_SESSION['id_utente'];
+        $query = "SELECT indirizzo_spedizione FROM utente WHERE id_utente ='$id_utente';";
+
+        //Invio la query al db
+        $result_set = mysqli_query($connessione, $query);
+
+        //Controllo se non ci sono errori nella query
+        if($result_set == false)
+        {
+          die(mysqli_error($connessione));
+        }
+
+        //Controllo se ci sono righe nel risultato
+        if(mysqli_num_rows($result_set) > 0)
+        {
+          //Faccio il fetch dell'array associativo
+          $row = mysqli_fetch_assoc($result_set);
+          $indirizzo = $row['indirizzo_spedizione'];
+        }
+
+
+        ?>
        <div class="col-sm-9 col-xs-12" style="border-radius: 5px; padding-top:5px; background-color:#F9F9F9">
          <div class="row" style="padding:10px;">
            <div class="col-sm-3 col-xs-12">
              <h4>Indirizzo spedizione:</h4>
            </div>
            <div class="col-sm-9 col-xs-12">
-             <input type="text" class="form-control" value="Via Ciaculli 14, Palermo, Italia.">
+             <input name="indirizzo-spedizione" type="text" class="form-control" value="<?php echo $indirizzo ?>">
              <br>
              <label onclick="disableEnable('fatturazione');"><input id="checkbox" type="checkbox" checked> Utilizza questo indirizzo come indirizzo di fatturazione.</label>
              <br>
@@ -101,9 +140,8 @@
              <h4>Indirizzo fatturazione:</h4>
            </div>
            <div class="col-sm-9 col-xs-12">
-             <input type="text" class="form-control" value="Via Ciaculli 14, Palermo, Italia." >
+             <input name="indirizzo-fatturazione" type="text" class="form-control" value="<?php echo $indirizzo ?>" >
              <br>
-
            </div>
          </div>
        </div>
@@ -120,13 +158,44 @@
          </div>
 
          <div class="col-sm-9 col-xs-12"> <!-- QUI DENTRO VANNO LE CARTE -->
-           <form>
 
-             <div class="col-sm-9 col-xs-12" class="form-control" style="margin-bottom:20px;">
+          <?php
+            //Stampiamo le carte dell'utente
+            //$id_utente = $_SESSION['id_utente']; dichiarato sopra
+            $query = "SELECT * FROM Carta WHERE id_utente = '$id_utente';";
+
+            //Invio la query al db
+            $result_set = mysqli_query($connessione, $query);
+
+            //Controllo se non ci sono errori nella query
+            if($result_set == false)
+            {
+              die(mysqli_error($connessione));
+            }
+
+            //Controllo se ci sono righe nel risultato
+            if(mysqli_num_rows($result_set) > 0)
+            {
+              //Faccio il fetch dell'array associativo
+              while($row = mysqli_fetch_assoc($result_set))
+              {
+                $id_carta           = $row['id_carta'];
+                $intestatario       = $row['intestatario'];
+                $numero_carta       = $row['numero_carta'];
+                $mese_scadenza      = $row['mese_scadenza'];
+                $anno_scadenza      = $row['anno_scadenza'];
+                $codice_sicurezza   = $row['codice_sicurezza'];
+                $denominazione      = $row['denominazione'];
+                draw_carta($id_carta, $intestatario, $numero_carta, $mese_scadenza, $anno_scadenza, $codice_sicurezza, $denominazione);
+              }
+            }
+           ?>
+
+             <!--<div class="col-sm-9 col-xs-12" class="form-control" style="margin-bottom:20px;">
 
                <div class="form-group">
                   <label for="indirizzo">Carta</label>
-                  <label class="pull-right" for="seleziona">Seleziona</label><input class="pull-right" type="radio" name="card" checked>
+                  <label class="pull-right" for="seleziona">Seleziona</label><input class="pull-right" type="radio" name="card" value="11" checked>
                   <input type="text" class="form-control" id="denominazione" value="Mastercard" disabled>
              </div>
              <div class="form-group">
@@ -164,7 +233,7 @@
            </div>
 
 
-              <div class="col-sm-9 col-xs-12" class="form-control" style="margin-bottom:10px;">
+              <div class="col-sm-9 col-xs-12" class="form-control" style="margin-bottom:20px;">
 
                 <div class="form-group">
                     <label for="indirizzo">Carta</label><label class="pull-right" for="indirizzo">Seleziona</label><input class="pull-right" type="radio" name="card">
@@ -202,11 +271,11 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </form>
+              </div>-->
+
          </div> <!-- FINE CARTE -->
        </div>
-
+       </form>
 
 
 

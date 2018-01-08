@@ -2,6 +2,16 @@
 
   include "libreria.php";
 
+  /*Avvio la sessione e controllo che il login sia stato effettuato*/
+  session_start();
+
+  if(!isset($_SESSION['id_utente']))
+    reindirizza("login.php?=not-logged");
+
+    /*   */
+
+
+
   //Apro la connessione per poi utilizzarla nelle query
   $connessione = connessione_db();
 
@@ -13,10 +23,13 @@
 
   if($_SERVER["REQUEST_METHOD"] == "GET")
   {
+    //Ricerca dei prodotti nel carrello
     if(isset($_GET['ricerca']))
     {
+      //Se il campo 'ricerca' è impostato faccio la ricerca con la seguente query
         $ricerca = test_input($_GET['ricerca']);
-        $search_query = "SELECT * FROM prodotto WHERE disponibilita > 0 AND (nome_prodotto LIKE '%{$ricerca}%' OR descrizione LIKE '%{$ricerca}%');";
+        if($ricerca != "")
+          $search_query = "SELECT * FROM prodotto WHERE disponibilita > 0 AND (nome_prodotto LIKE '%{$ricerca}%' OR descrizione LIKE '%{$ricerca}%') ORDER BY rand();";
     }
   }
 
@@ -29,14 +42,19 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Rende responsive il tutto-->
     <!--<link rel="stylesheet" type="text/css" href="css/basic.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="css/navbar.css">-->
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php include_bootstrap(); ?>
   </head>
   <body>
 
-    <nav class="navbar navbar-inverse">
+    <?php
+      $user = $_SESSION['nome'] . " " . $_SESSION['cognome'];
+      draw_navbar($ricerca,$user, count_carrello());
+    ?>
+
+    <!--<nav class="navbar navbar-inverse">
     <div class="">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -48,9 +66,9 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <form class="col-xs-6 navbar-form navbar-left" action="shop.php" method="get">
+          <form class="navbar-form navbar-left" id="navBarSearchForm"  action="shop.php" method="get">
             <div class="input-group">
-              <input name="ricerca" type="text" class="form-control" value="<?php echo $ricerca ?>" placeholder="Mobili, Comodini, Sedie .." >
+              <input name="ricerca" type="text" class="form-control" value="" placeholder="Mobili, Comodini, Sedie .." >
               <div class="input-group-btn">
                 <button class="btn btn-default" type="submit">Cerca</button>
               </div>
@@ -59,12 +77,12 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#"><span class="glyphicon glyphicon-user"></span> Simon Pietro </a></li>
-          <li><a href="carrello.php"><span class="glyphicon glyphicon-shopping-cart"></span> Carrello <span class="badge"><?php echo count_carrello() ?></span></a></li>
+          <li><a href="carrello.php"><span class="glyphicon glyphicon-shopping-cart"></span> Carrello <span class="badge"></span></a></li>
           <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
       </div>
     </div>
-  </nav>
+  </nav>-->
 
 
 

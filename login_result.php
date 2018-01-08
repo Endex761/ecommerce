@@ -3,6 +3,8 @@
   /*
     Il file contiene il codice necessario per fare il login al sitoweb
   */
+  /*Inizializzo la sessione*/
+  session_start();
 
   include 'libreria.php';
 
@@ -41,7 +43,7 @@
   $connessione = connessione_db();
 
   //Creo la query per controllare che i dati inseriti corrispondano a un account e che le credenziali siano giuste
-  $query = "SELECT id_utente, password FROM utente WHERE email='$email';";
+  $query = "SELECT id_utente, nome, cognome, password FROM utente WHERE email='$email';";
 
   //Lancio la query e metto il risultato nel result_set
   $result_set = mysqli_query($connessione, $query);
@@ -65,6 +67,10 @@
     //Confronto la password per vedere se corrisponde
     if($row['password'] == $crypt_password)
     {
+      //Imposto l'id_utente il nome e il cognome all'interno della sessione
+      $_SESSION['id_utente'] = $row['id_utente'];
+      $_SESSION['nome'] = $row['nome'];
+      $_SESSION['cognome'] = $row['cognome'];
       reindirizza("shop.php");
     }
     else

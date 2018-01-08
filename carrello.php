@@ -1,8 +1,16 @@
 <?php
 
+  include 'libreria.php';
+
+  /*Avvio la sessione e controllo che il login sia stato effettuato*/
+  session_start();
+
+  if(!isset($_SESSION['id_utente']))
+    reindirizza("login.php?=not-logged");
+  /*   */
+
   //Questo file permette la gestione del carrello
 
-  include 'libreria.php';
 
   //Apro la connessione al database
   $connessione = connessione_db();
@@ -130,45 +138,17 @@
    <head>
      <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Rende responsive il tutto-->
      <!--<link rel="stylesheet" type="text/css" href="css/basic.css">-->
-     <!--<link rel="stylesheet" type="text/css" href="css/navbar.css">-->
+     <link rel="stylesheet" type="text/css" href="css/navbar.css">
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1">
      <?php include_bootstrap(); ?>
    </head>
    <body>
 
-     <nav class="navbar navbar-inverse">
-     <div class="">
-       <div class="navbar-header">
-         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-           <span class="icon-bar"></span>
-           <span class="icon-bar"></span>
-           <span class="icon-bar"></span>
-         </button>
-         <a class="navbar-brand" href="shop.php">SR Furnitures</a>
-       </div>
-       <div class="collapse navbar-collapse" id="myNavbar">
-         <ul class="nav navbar-nav">
-           <form class="col-xs-6 navbar-form navbar-left">
-             <div class="input-group">
-               <input  type="text" class="form-control" placeholder="Mobili, Comodini, Sedie ..">
-               <div class="input-group-btn">
-                 <button class="btn btn-default" type="submit">Cerca</button>
-               </div>
-             </div>
-           </form>
-         </ul>
-         <ul class="nav navbar-nav navbar-right">
-           <li><a href="#"><span class="glyphicon glyphicon-user"></span> Simon Pietro </a></li>
-           <li><a href="carrello.php"><span class="glyphicon glyphicon-shopping-cart"></span> Carrello <span class="badge"><?php echo $count_carrello ?></span></a></li>
-           <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-         </ul>
-       </div>
-     </div>
-   </nav>
-
-
-
+     <?php
+        $user = $_SESSION['nome'] . " " . $_SESSION['cognome'];
+        draw_navbar("", $user, $count_carrello);
+      ?>
 
      <div class="container-fluid">
 
@@ -186,7 +166,8 @@
              <h2 style="color:red;">€<?php echo $totale ?></h2>
            </div>
            <div "col-xs-12">
-             <a href="acquisto.php"><button type="button" class="btn btn-success <?php if(!$count_carrello) echo 'disabled' ?>">Procedi all'aquisto!</button></a>
+             <!-- Se il conunt_carrello = 0 non permettere il reindirizzamento ad acquisto -->
+             <a href="<?php if(!$count_carrello) echo '#'; else echo 'acquisto.php'; ?>"><button type="button" class="btn btn-success <?php if(!$count_carrello) echo 'disabled' ?>">Procedi all'aquisto!</button></a>
            </div>
            <hr />
            <div "col-xs-12" style="padding:10px;">
@@ -242,6 +223,10 @@
     <!-- Questo script risolve il bug di aggiungere più prodotti al refresh della pagina -->
     <script> window.onload = function () { history.replaceState('', '', 'carrello.php'); } </script>
   </div><!--content-->
+
+  <?php
+    draw_footer();
+  ?>
   </body>
 
 </html>

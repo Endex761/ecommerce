@@ -5,7 +5,7 @@
   session_start();
 
   if(!isset($_SESSION['id_utente']))
-    reindirizza("login.php?=not-logged");
+    reindirizza("login.php?=status=not_logged");
 
   /*   */
 
@@ -73,7 +73,7 @@
    </head>
    <body onload="disableEnable('fatturazione');">
      <!-- al caricamento uso la funzione disableEnable per disattivare a prescindere il box dell'indirizzo di fatturazione-->
-     <form action="acquistato.php">
+     <form action="acquistato.php" method="post">
        <!-- il form comprende la carta selezionata, gli indirizzi di spedizione e fatturazione e il bottone conferma di submit -->
 
      <div class="container-fluid">
@@ -127,11 +127,11 @@
              <h4>Indirizzo spedizione:</h4>
            </div>
            <div class="col-sm-9 col-xs-12">
-             <input name="indirizzo-spedizione" type="text" class="form-control" value="<?php echo $indirizzo ?>">
+             <input name="indirizzo_spedizione" type="text" class="form-control" value="<?php echo $indirizzo ?>">
              <br>
              <label onclick="disableEnable('fatturazione');"><input id="checkbox" type="checkbox" checked> Utilizza questo indirizzo come indirizzo di fatturazione.</label>
              <br>
-             <a>Cambia indirizzo di spedizione predefinito</a>
+             <a href="impostazioni.php">Cambia indirizzo di spedizione predefinito.</a>
            </div>
          </div>
 
@@ -140,7 +140,7 @@
              <h4>Indirizzo fatturazione:</h4>
            </div>
            <div class="col-sm-9 col-xs-12">
-             <input name="indirizzo-fatturazione" type="text" class="form-control" value="<?php echo $indirizzo ?>" >
+             <input name="indirizzo_fatturazione" type="text" class="form-control" value="<?php echo $indirizzo ?>" >
              <br>
            </div>
          </div>
@@ -189,90 +189,12 @@
                 draw_carta($id_carta, $intestatario, $numero_carta, $mese_scadenza, $anno_scadenza, $codice_sicurezza, $denominazione);
               }
             }
+            else
+            {
+              echo "<h3>Non hai inserito nessuna carta</h3>";
+              echo "<a href='impostazioni.php'>Vai alle impostazioni</a>";
+            }
            ?>
-
-             <!--<div class="col-sm-9 col-xs-12" class="form-control" style="margin-bottom:20px;">
-
-               <div class="form-group">
-                  <label for="indirizzo">Carta</label>
-                  <label class="pull-right" for="seleziona">Seleziona</label><input class="pull-right" type="radio" name="card" value="11" checked>
-                  <input type="text" class="form-control" id="denominazione" value="Mastercard" disabled>
-             </div>
-             <div class="form-group">
-                 <label for="indirizzo">Intestatario</label>
-                 <input name="indirizzo" type="text" class="form-control" id="intestatario" value="Simon Pietro Romeo" disabled>
-             </div>
-             <div class="row">
-               <div class="col-sm-9 col-xs-8">
-                 <div class="form-group">
-                     <label for="indirizzo">Numero Carta</label>
-                     <input name="indirizzo" type="text" class="form-control" id="mese-scadenza" value="**** **** **** 7593" disabled>
-                 </div>
-               </div>
-               <div class="col-sm-3 col-xs-4">
-                 <div class="form-group">
-                     <label for="indirizzo">CVV</label>
-                     <input name="indirizzo" type="text" class="form-control" id="anno-scadenza" value="2020" disabled>
-                 </div>
-               </div>
-             </div>
-             <div class="row">
-               <div class="col-xs-6">
-                 <div class="form-group">
-                     <label for="indirizzo">Mese Scadenza</label>
-                     <input name="indirizzo" type="text" class="form-control" id="mese-scadenza" value="11" disabled>
-                 </div>
-               </div>
-               <div class="col-xs-6">
-                 <div class="form-group">
-                     <label for="indirizzo">Anno Scadenza</label>
-                     <input name="indirizzo" type="text" class="form-control" id="anno-scadenza" value="2020" disabled>
-                 </div>
-               </div>
-             </div>
-           </div>
-
-
-              <div class="col-sm-9 col-xs-12" class="form-control" style="margin-bottom:20px;">
-
-                <div class="form-group">
-                    <label for="indirizzo">Carta</label><label class="pull-right" for="indirizzo">Seleziona</label><input class="pull-right" type="radio" name="card">
-                    <input type="text" class="form-control" id="denominazione" value="Mastercard" disabled>
-                </div>
-                <div class="form-group">
-                    <label for="indirizzo">Intestatario</label>
-                    <input name="indirizzo" type="text" class="form-control" id="intestatario" value="Simon Pietro Romeo" disabled>
-                </div>
-                <div class="row">
-                  <div class="col-sm-9 col-xs-8">
-                    <div class="form-group">
-                        <label for="indirizzo">Numero Carta</label>
-                        <input name="indirizzo" type="text" class="form-control" id="mese-scadenza" value="**** **** **** 7593" disabled>
-                    </div>
-                  </div>
-                  <div class="col-sm-3 col-xs-4">
-                    <div class="form-group">
-                        <label for="indirizzo">CVV</label>
-                        <input name="indirizzo" type="text" class="form-control" id="anno-scadenza" value="2020" disabled>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-6">
-                    <div class="form-group">
-                        <label for="indirizzo">Mese Scadenza</label>
-                        <input name="indirizzo" type="text" class="form-control" id="mese-scadenza" value="11" disabled>
-                    </div>
-                  </div>
-                  <div class="col-xs-6">
-                    <div class="form-group">
-                        <label for="indirizzo">Anno Scadenza</label>
-                        <input name="indirizzo" type="text" class="form-control" id="anno-scadenza" value="2020" disabled>
-                    </div>
-                  </div>
-                </div>
-              </div>-->
-
          </div> <!-- FINE CARTE -->
        </div>
        </form>

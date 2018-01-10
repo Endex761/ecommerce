@@ -6,7 +6,7 @@
   session_start();
 
   if(!isset($_SESSION['id_utente']))
-    reindirizza("login.php?=not-logged");
+    reindirizza("login.php?status=not_logged");
 
     /*   */
 
@@ -29,7 +29,7 @@
       //Se il campo 'ricerca' è impostato faccio la ricerca con la seguente query
         $ricerca = test_input($_GET['ricerca']);
         if($ricerca != "")
-          $search_query = "SELECT * FROM prodotto WHERE disponibilita > 0 AND (nome_prodotto LIKE '%{$ricerca}%' OR descrizione LIKE '%{$ricerca}%') ORDER BY rand();";
+          $search_query = "SELECT * FROM prodotto WHERE (nome_prodotto LIKE '%{$ricerca}%' OR descrizione LIKE '%{$ricerca}%') ORDER BY rand() LIMIT 9;";
     }
   }
 
@@ -117,12 +117,12 @@
               //Faccio il fetch dell'array associativo
               while($row = mysqli_fetch_assoc($result_set))
               {
-                $id_prodotto =    $row['id_prodotto'];
-                $nome_prodotto =  $row['nome_prodotto'];
-                $descrizione =    $row['descrizione'];
-                $prezzo =         $row['prezzo'];
-                $disponibilita =  $row['disponibilita'];
-                $foto =           $row['foto'];
+                $id_prodotto    = $row['id_prodotto'];
+                $nome_prodotto  = $row['nome_prodotto'];
+                $descrizione    = $row['descrizione'];
+                $prezzo         = $row['prezzo'];
+                $disponibilita  = $row['disponibilita'];
+                $foto           = $row['foto'];
                 //stampo il prodotto
                 draw_prodotto($id_prodotto, $nome_prodotto, $descrizione, $prezzo, $disponibilita, $foto);
                 $counter++;

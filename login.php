@@ -1,6 +1,27 @@
 <?php
 
   include 'libreria.php';
+
+  //Se status == not_logged stampero' un messaggio di errore
+  $logged = true;
+  if($_SERVER["REQUEST_METHOD"] == "GET")
+  {
+    if(isset($_GET['status']))
+    {
+      $status = test_input($_GET['status']);
+      if($status == 'not_logged')
+        $logged = false;
+    }
+  }
+
+  if($logged)
+  {
+    $errore = "";
+  }
+  else
+  {
+      $errore = "Devi effettuare l'accesso per accedere a questa pagina.";
+  }
 ?>
 
 <!DOCTYPE html>
@@ -28,8 +49,9 @@
         <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12" style="border: 2px solid grey; border-radius: 10px; background:#F9F9F9;">
 
 
-          <div class="col-lg-8 col-md-8 col-sm-8 col-xm-12">
+          <div class="col-lg-12 col-xs-12">
             <h2>Accedi</h2>
+            <h6 style="color:red;"><?php echo $errore ?></h6>
           </div>
 
 

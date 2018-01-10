@@ -6,6 +6,14 @@
 
   include 'libreria.php';
 
+  /*Avvio la sessione e controllo che il login sia stato effettuato*/
+  session_start();
+
+  if(!isset($_SESSION['ADMIN']))
+    reindirizza("login.php?status=not_logged");
+
+    /*   */
+
   //La variabile controlla se tutti i campi del form sono stati inizializati
   $formOk = true;
 
@@ -98,6 +106,7 @@
       else
       {
           errore("C'è stato un problema nel caricamento del file." . print_r($_FILES,true));
+          die();
       }
   }
 

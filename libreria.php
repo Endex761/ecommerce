@@ -26,6 +26,12 @@
   /* Nome del database da usare*/
   define("DB_NAME","ecommerce");
 
+  /* Email administrator */
+  define("ADMIN_EMAIL","admin@srfurniture.it");
+
+  /* Passwrrd administrator */
+  define("ADMIN_PASSWORD","administrator");
+
 
   /*TEST AREA*/
 

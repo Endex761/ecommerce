@@ -107,7 +107,7 @@
   if(!$query_inserimento_ok)
     errore("Errore registrazione");
   else
-    echo "INSERITA CORRETTAMENTE";
+    reindirizza("login.php");
 
 
   //Chiudo la connessione al DATABASE_NAME

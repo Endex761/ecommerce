@@ -6,7 +6,7 @@
   session_start();
 
   if(!isset($_SESSION['id_utente']))
-    reindirizza("login.php?=not-logged");
+    reindirizza("login.php?status=not_logged");
   /*   */
 
   //Questo file permette la gestione del carrello
@@ -39,8 +39,27 @@
       //Prendo il valore di add e lo metto nella variabile dopo averlo testato
       $add = test_input($_GET['add']);
 
+      $query = "SELECT disponibilita FROM Prodotto WHERE id_prodotto=$add";
+
+      //Invio la query al db
+      $result_set = mysqli_query($connessione, $query);
+
+      //Controllo se non ci sono errori nella query
+      if($result_set == false)
+      {
+        die(mysqli_error($connessione));
+      }
+
+      //Controllo se ci sono righe nel risultato
+      if(mysqli_num_rows($result_set) > 0)
+      {
+        //Faccio il fetch dell'array associativo
+        $row = mysqli_fetch_assoc($result_set);
+        $disponibilita = $row['disponibilita'];
+      }
+
       //Se il prodotto è già presente nel carrello
-      if(isset($carrello[$add]))
+      if(isset($carrello[$add]) and $carrello[$add] < $disponibilita)
       {
         //Aumento la quantità del prodotto nel carrello
         $carrello[$add] ++;

@@ -7,6 +7,14 @@
   //Includo la libreria con le funzioni da me definite
   include 'libreria.php';
 
+  /*Avvio la sessione e controllo che il login sia stato effettuato*/
+  session_start();
+
+  if(!isset($_SESSION['ADMIN']))
+    reindirizza("login.php?status=not_logged");
+
+    /*   */
+
   //Se mi viene passato un id
   if(isset($_GET['id']))
   {

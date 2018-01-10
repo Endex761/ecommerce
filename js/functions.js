@@ -25,7 +25,6 @@ function enable(id)
 
 function disableEnable(id)
 {
-
   if(document.getElementById('checkbox').checked == true)
   {
     disable(id);
@@ -34,6 +33,21 @@ function disableEnable(id)
   {
     enable(id);
   }
+}
 
+function numeroCarta()
+{
+  var codice = document.getElementById(id);
+  switch(codice.lenght)
+  {
+    case 4:
+    case 9:
+    case 14:
+    codice.value += "-";
+  }
+}
 
+function tornaIndietro()
+{
+    window.history.back();
 }

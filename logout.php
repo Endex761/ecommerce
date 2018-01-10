@@ -5,6 +5,7 @@
   unset($_SESSION['id_utente']);
   unset($_SESSION['nome']);
   unset($_SESSION['cognome']);
+  unset($_SESSION['ADMIN']);
 
   reindirizza("home.php");
  ?>

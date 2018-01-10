@@ -65,7 +65,10 @@
     echo "  <div class='col-sm-3 col-xs-12'>";
     echo "    <div class='col-xs-12'>";
     echo "      <h4>Prezzo</h4>";
-    echo "      <h3 style='color:green;'>€$prezzo</h3>";
+    if($disponibilita > 0)
+      echo "      <h3 style='color:green;'>€$prezzo</h3>";
+    else
+      echo "      <h3 style='color:red;'>Non disponibile</h3>";
     echo "    </div>";
     echo "    <div class='col-xs-12'>";
     echo "      <h5>Quantità:$quantita</h5>";
@@ -121,7 +124,8 @@
     echo "        </form>";
     echo "      </ul>";
     echo "      <ul class='nav navbar-nav navbar-right'>";
-    echo "        <li><a href='#'><span class='glyphicon glyphicon-user'></span> $user </a></li>";
+    echo "        <li><a href='shop.php'><span class='glyphicon glyphicon-home'></span> Shop </a></li>";
+    echo "        <li><a href='impostazioni.php'><span class='glyphicon glyphicon-user'></span> $user </a></li>";
     echo "        <li><a href='carrello.php'><span class='glyphicon glyphicon-shopping-cart'></span> Carrello <span class='badge'> $count_carrello </span></a></li>";
     echo "        <li><a href='logout.php'><span class='glyphicon glyphicon-log-out'></span> Logout</a></li>";
     echo "      </ul>";
@@ -139,7 +143,7 @@
     echo "<div class='col-sm-9 col-xs-12' class='form-control' style='margin-bottom:20px;'>";
     echo "  <div class='form-group'>";
     echo "    <label for='indirizzo'>Carta</label>";
-    echo "    <label class='pull-right' for='seleziona'>Seleziona</label><input class='pull-right' type='radio' name='card' value='$id_carta' checked>";
+    echo "    <label class='pull-right' for='seleziona'>Seleziona</label><input class='pull-right' type='radio' name='id_carta' value='$id_carta' required>";
     echo "    <input type='text' class='form-control' id='denominazione' value='$denominazione' disabled>";
     echo "  </div>";
     echo "  <div class='form-group'>";

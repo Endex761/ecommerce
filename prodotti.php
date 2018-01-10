@@ -1,7 +1,57 @@
 <?php
 
 	include "libreria.php";
-	$connessione = connessione_db();
+
+	/*Avvio la sessione e controllo che il login sia stato effettuato*/
+  session_start();
+
+  if(!isset($_SESSION['ADMIN']))
+    reindirizza("login.php?status=not_logged");
+
+    /*   */
+
+		$connessione = connessione_db();
+
+		if($_SERVER["REQUEST_METHOD"] == "GET")
+		{
+			if(isset($_GET['add']))
+			{
+				//Prendo il valore di add e lo metto nella variabile dopo averlo testato
+				$add = test_input($_GET['add']);
+
+				$query = "SELECT disponibilita FROM Prodotto WHERE id_prodotto=$add";
+
+				//Invio la query al db
+				$result_set = mysqli_query($connessione, $query);
+
+				//Controllo se non ci sono errori nella query
+				if($result_set == false)
+				{
+					die(mysqli_error($connessione));
+				}
+
+				//Controllo se ci sono righe nel risultato
+				if(mysqli_num_rows($result_set) > 0)
+				{
+					//Faccio il fetch dell'array associativo
+					$row = mysqli_fetch_assoc($result_set);
+					$disponibilita = $row['disponibilita'];
+				}
+				$disponibilita_aggiornata = $disponibilita + 1;
+				$query_rifornimento = "UPDATE prodotto SET disponibilita=$disponibilita_aggiornata WHERE id_prodotto=$add";
+
+				//Invio la query al db
+				$result_set = mysqli_query($connessione, $query_rifornimento);
+
+				//Controllo se non ci sono errori nella query
+				if($result_set == false)
+				{
+					die(mysqli_error($connessione));
+				}
+			}
+		}
+
+
 ?>
 
 <html>
@@ -20,6 +70,11 @@
 		</style>
 	</head>
 	<body>
+
+		<div class="col-xs-12">
+			<a href="logout.php">Esci</a>
+		</div>
+
 		<div class="col-xs-12">
 			<table class="table">
 				<thead>
@@ -34,6 +89,18 @@
 			      </tr>
 			    </thead>
 			    <tbody>
+
+						<tr class= "text-center"> <!--riga per aggiungere un nuovo prodotto -->
+							<form action="add_product.php" method="POST" class="form-group" enctype="multipart/form-data">
+								<td></td>
+								<td><input class="form-control" type="text" name="nome-prodotto" placeholder="Nome prodotto"></td>
+								<td><input class="form-control" type="text" name="descrizione" placeholder="Descrizione"></td>
+								<td><input class="form-control" type="text" name="prezzo" placeholder="Prezzo"></td>
+								<td><input class="form-control" type="number" name="disponibilita" placeholder="Disponibilità"></td>
+								<td><input type="file" name="foto"  accept=".jpg, .jpeg, .png"></td>
+								<td><button type="submit" class="btn-link"><span class="glyphicon glyphicon-plus"></span></button></td>
+							</form>
+						</tr>
 			    	<!--<tr>
 			        	<td>1</td>
 			        	<td>Comodino</td>
@@ -72,7 +139,7 @@
 									echo "	<td>$nome_prodotto</td>";
 									echo "	<td>$descrizione</td>";
 									echo "	<td>$prezzo</td>";
-									echo "	<td>$disponibilita</td>";
+									echo "	<td>$disponibilita <a href='prodotti.php?add=$id_prodotto'>Rifornisci</a></td>";
 									echo "	<td>$foto</td>";
 									echo "	<td>";
 									echo "		<a href='delete_product.php?id=$id_prodotto'><span class='glyphicon glyphicon-trash'></span></a>";
@@ -82,7 +149,7 @@
 							}
 			    	?>
 
-						<tr class= "text-center"> <!--riga per aggiungere un nuovo prodotto -->
+						<!--<tr class= "text-center"> <!--riga per aggiungere un nuovo prodotto
 							<form action="add_product.php" method="POST" class="form-group" enctype="multipart/form-data">
 								<td></td>
 								<td><input class="form-control" type="text" name="nome-prodotto" placeholder="Nome prodotto"></td>
@@ -92,6 +159,7 @@
 								<td><input type="file" name="foto"  accept=".jpg, .jpeg, .png"></td>
 								<td><button type="submit" class="btn-link"><span class="glyphicon glyphicon-plus"></span></button></td>
 							</form>
+						</tr>-->
 			    </tbody>
 			</table>
 		</div>

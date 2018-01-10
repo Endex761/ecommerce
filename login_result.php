@@ -3,10 +3,13 @@
   /*
     Il file contiene il codice necessario per fare il login al sitoweb
   */
+
+  include 'libreria.php';
+
   /*Inizializzo la sessione*/
   session_start();
 
-  include 'libreria.php';
+
 
   //La variabile controlla se tutti i campi del form sono stati inizializati
   $formOk = true;
@@ -39,6 +42,14 @@
     die();
   }
 
+  /* admin login */
+  if($email == ADMIN_EMAIL and $password == ADMIN_PASSWORD)
+  {
+    $_SESSION['ADMIN'] = "yes";
+    reindirizza("prodotti.php");
+    die();
+  }
+
   //A questo punto posso creare la connessione al database con la funzione connessione_db
   $connessione = connessione_db();
 
@@ -68,9 +79,9 @@
     if($row['password'] == $crypt_password)
     {
       //Imposto l'id_utente il nome e il cognome all'interno della sessione
-      $_SESSION['id_utente'] = $row['id_utente'];
-      $_SESSION['nome'] = $row['nome'];
-      $_SESSION['cognome'] = $row['cognome'];
+      $_SESSION['id_utente']  = $row['id_utente'];
+      $_SESSION['nome']       = $row['nome'];
+      $_SESSION['cognome']    = $row['cognome'];
       reindirizza("shop.php");
     }
     else

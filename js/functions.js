@@ -35,15 +35,17 @@ function disableEnable(id)
   }
 }
 
-function numeroCarta()
+
+function numeroCarta(id)
 {
-  var codice = document.getElementById(id);
-  switch(codice.lenght)
+  var codice = id.value.toString();
+  //console.log(codice.length);
+  switch(codice.length)
   {
     case 4:
     case 9:
     case 14:
-    codice.value += "-";
+      id.value += "-";
   }
 }
 

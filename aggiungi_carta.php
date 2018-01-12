@@ -11,7 +11,7 @@
   session_start();
 
   if(!isset($_SESSION['id_utente']))
-    reindirizza("login.php?=not-logged");
+    reindirizza("login.php?=status=not_logged");
     /*   */
 
   //La variabile controlla se tutti i campi del form sono stati inizializati

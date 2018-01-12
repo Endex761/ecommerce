@@ -9,12 +9,47 @@
     reindirizza("login.php?=not-logged");
     /*   */
 
+  //Prendo l'id dell'utente loggato
+  $id_utente = $_SESSION['id_utente'];
+
+  //Modificato si riferisce all'indirizzo, se è stato modificato verra impostato a true successivamente
+  $modificato = false;
+
   //Apro la connessione per poi utilizzarla nelle query
   $connessione = connessione_db();
 
+  //Se richiesto modifico l'indirizzo di spedizone predefinito
+  if($_SERVER["REQUEST_METHOD"] == "POST")
+  {
+
+    if(!empty($_POST['nuovo_indirizzo']))
+    {
+      $nuovo_indirizzo = test_input($_POST['nuovo_indirizzo']);
+    }
+    else
+    {
+      errore("Form non compilato correttamente");
+      die();
+    }
+
+    //Creo la query per modificare l'indirizzo di spedizione
+    $query_modifica = "UPDATE Utente SET indirizzo_spedizione='$nuovo_indirizzo' WHERE id_utente=$id_utente;";
+
+    //Invio la query al db
+    $result_set = mysqli_query($connessione, $query_modifica);
+
+    //Controllo se non ci sono errori nella query
+    if($result_set == false)
+    {
+      die(mysqli_error($connessione));
+    }
+
+    $modificato = true;
+  }
+
 
    //Prendo l'indirizzo di spedizione
-   $id_utente = $_SESSION['id_utente'];
+
    $query = "SELECT indirizzo_spedizione FROM utente WHERE id_utente ='$id_utente';";
 
    //Invio la query al db
@@ -35,6 +70,8 @@
    }
 
 
+
+
 ?>
 <html>
   <head>
@@ -47,7 +84,6 @@
     <?php include_bootstrap(); ?>
   </head>
   <body>
-    <script src="js/functions.js"></script>
     <?php
       $user = $_SESSION['nome'] . " " . $_SESSION['cognome'];
       draw_navbar("",$user, count_carrello());
@@ -65,12 +101,19 @@
             <h4>Indirizzo spedizione:</h4>
           </div>
           <div class="col-sm-9 col-xs-12">
+            <form action="impostazioni.php" method="post">
             <div class='input-group'>
-              <input name="indirizzo_spedizione" type="text" class="form-control" value="<?php echo $indirizzo ?>">
+              <input name="nuovo_indirizzo" type="text" class="form-control" value="<?php echo $indirizzo ?>">
               <div class='input-group-btn'>
                 <button class='btn btn-default' type='submit'>Salva</button>
               </div>
             </div>
+            <?php
+              if($modificato)
+                echo "<h5 style='color:green;'>Salvato</h5>";
+            ?>
+
+            </form>
           </div>
         </div>
         <div class="col-sm-3 col-xs-12">

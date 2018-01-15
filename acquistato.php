@@ -177,7 +177,7 @@
           <a href="shop.php"><h2>Torna allo shop</h2></a>
         </div>
         <div class="col-md-6 col-xs-12 text-center">
-          <a href="#"><h2>Visualizza Acquisti</h2></a>
+          <a href="ordini.php"><h2>Visualizza Acquisti</h2></a>
         </div>
       </div>
       <?php

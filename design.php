@@ -88,6 +88,123 @@
     echo "</div>";
   }
 
+  function draw_singolo_ordine($id_prodotto, $nome_prodotto, $prezzo, $foto, $quantita)
+  {
+    echo "<div class='col-xs-9 text-center' style='background-color:#F9F9F9; padding:5px; margin-bottom:5px;'>";
+    echo "  <div class='col-sm-3 col-xs-12'>";
+    echo "    <a href='product_img/$foto'><img class='img-thumbnail' src='product_img/$foto' height='150px' width='150px'></a>";
+    echo "  </div>";
+    echo "  <div class='col-sm-6 col-xs-12'>";
+    echo "    <div class='col-xs-12'>";
+    echo "     <h3 class='text-primary'> $nome_prodotto </h3>";
+    echo "    </div>";
+    echo "  </div>";
+    echo "  <div class='col-sm-3 col-xs-12'>";
+    echo "    <div class='col-xs-12'>";
+    echo "      <h4>Prezzo</h4>";
+    echo "      <h3 style='color:green;'>€$prezzo</h3>";
+    echo "    </div>";
+    echo "    <div class='col-xs-12'>";
+    echo "      <h5>Quantità:$quantita</h5>";
+    echo "    </div>";
+    echo "  </div>";
+    echo "</div>";
+  }
+
+  function draw_ordine($id_acquisto, $data_acquisto, $indirizzo_spedizione, $indirizzo_fatturazione, $numero_carta, $connessione)
+  {
+    $numero_carta = substr($numero_carta, 15);
+
+    $query = "SELECT SUM(prezzo_acquisto*quantita) AS totale FROM Prodotto, AcquistoSingolo WHERE id_acquisto=$id_acquisto AND prodotto.id_prodotto = acquistosingolo.id_prodotto;";
+    //Invio la query al db
+    $result_set = mysqli_query($connessione, $query);
+
+    //Controllo se non ci sono errori nella query
+    if($result_set == false)
+    {
+      die(mysqli_error($connessione));
+    }
+
+    //Controllo se ci sono righe nel risultato
+    if(mysqli_num_rows($result_set) > 0)
+    {
+      //Faccio il fetch dell'array associativo
+      $row = mysqli_fetch_assoc($result_set);
+      $totale = $row['totale'];
+    }
+
+    echo "<div class='panel panel-default'>";
+    echo "  <div class='panel-heading'>"; //Info sull'ordine complessivo
+    echo "    <div class='row text-center'>";
+    echo "      <div class='col-xs-2'>";
+    echo "        <strong>Ordine effettuato:</strong>";
+    echo "        <br>";
+    echo "        <p>$data_acquisto</p>";
+    echo "      </div>";
+    echo "      <div class='col-xs-3'>";
+    echo "        <strong>Indirizzo spedizione:</strong>";
+    echo "        <br>";
+    echo "        <p>$indirizzo_spedizione</p>";
+    echo "      </div>";
+    echo "      <div class='col-xs-3'>";
+    echo "        <strong>Indirizzo Fatturazione:</strong>";
+    echo "        <br>";
+    echo "        <p>$indirizzo_fatturazione</p>";
+    echo "      </div>";
+    echo "      <div class='col-xs-1'>";
+    echo "        <strong>Totale:</strong>";
+    echo "        <br>";
+    echo "        <p>€$totale</p>";
+    echo "      </div>";
+    echo "      <div class='col-xs-2'>";
+    echo "        <strong>Pagamento:</strong>";
+    echo "        <p>****-****-****-$numero_carta</p>";
+    echo "      </div>";
+    echo "      <div class='col-xs-1'>";
+    echo "        <strong>ID Ordine:</strong>";
+    echo "        <br>";
+    echo "        <p>#$id_acquisto</p>";
+    echo "      </div>";
+    echo "    </div>";
+    echo "  </div>";
+
+    echo "  <div class='panel-body'>";//<!-- QUI DENTRO VANNO I SINGOLI ORDINI -->
+    echo "    <div class='col-sm-3 col-xs-12 pull-right text-center'>";
+    echo "      <h4>Stato consegna: In transito</h4>";
+    echo "    </div>";
+
+    $query = "SELECT prodotto.id_prodotto AS id_prodotto, prezzo_acquisto, quantita, foto, nome_prodotto FROM Prodotto, AcquistoSingolo WHERE id_acquisto=$id_acquisto AND prodotto.id_prodotto = acquistosingolo.id_prodotto;";
+
+    //Invio la query al db
+    $result_set = mysqli_query($connessione, $query);
+
+    //Controllo se non ci sono errori nella query
+    if($result_set == false)
+    {
+      die(mysqli_error($connessione));
+    }
+
+    //Controllo se ci sono righe nel risultato
+    if(mysqli_num_rows($result_set) > 0)
+    {
+      //Faccio il fetch dell'array associativo
+      while($row = mysqli_fetch_assoc($result_set))
+      {
+        $id_prodotto    = $row['id_prodotto'];
+        $nome_prodotto  = $row['nome_prodotto'];
+        $prezzo         = $row['prezzo_acquisto'];
+        $foto           = $row['foto'];
+        $quantita       = $row['quantita'];
+
+        draw_singolo_ordine($id_prodotto, $nome_prodotto, $prezzo, $foto, $quantita);
+      }
+
+    }
+
+    echo "  </div>";
+    echo "</div>";
+  }
+
   function draw_footer()
   {
     echo "<footer class='footer'>";
@@ -128,7 +245,7 @@
     echo "        <li><a href='impostazioni.php'><span class='glyphicon glyphicon-cog'></span> Impostazioni </a></li>";
 
     echo "        <li><a href='carrello.php'><span class='glyphicon glyphicon-shopping-cart'></span> Carrello <span class='badge'> $count_carrello </span></a></li>";
-    echo "        <li><a href='impostazioni.php'><span class='glyphicon glyphicon-user'></span> $user </a></li>";
+    echo "        <li><a href='ordini.php'><span class='glyphicon glyphicon-user'></span> $user </a></li>";
     echo "        <li><a href='logout.php'><span class='glyphicon glyphicon-log-out'></span> Logout</a></li>";
     echo "      </ul>";
     echo "    </div>";

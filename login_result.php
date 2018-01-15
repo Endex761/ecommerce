@@ -11,10 +11,10 @@
 
   if($_SERVER["REQUEST_METHOD"] == "GET")
   {
-    if(!empty($_GET['email']))
-      $email = test_input($_GET['email']);
+    if(!empty($_GET['impostazioni']))
+      $mail = test_input($_GET['impostazioni']);
     else
-      $email = false;
+      $mail = false;
   }
 
   //La variabile controlla se tutti i campi del form sono stati inizializati
@@ -88,8 +88,9 @@
       $_SESSION['id_utente']  = $row['id_utente'];
       $_SESSION['nome']       = $row['nome'];
       $_SESSION['cognome']    = $row['cognome'];
-      if($email)
+      if($mail)
         reindirizza("impostazioni.php#password_vecchia");
+
       else
         reindirizza("shop.php");
     }

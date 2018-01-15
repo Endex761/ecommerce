@@ -136,14 +136,6 @@
      $indirizzo = $row['indirizzo_spedizione'];
    }
 
-
-   //CAMBIO PASSWORD
-
-
-
-
-
-
 ?>
 <html>
   <head>
@@ -189,7 +181,7 @@
           </div>
         </div>
         <div class="col-sm-3 col-xs-12">
-          <h4>Carte</h4>
+          <h4>Aggiungi Carta</h4>
         </div>
         <div class="col-md-9 col-xs-12">
           <form action="aggiungi_carta.php" method="post">

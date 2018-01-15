@@ -125,8 +125,10 @@
     echo "      </ul>";
     echo "      <ul class='nav navbar-nav navbar-right'>";
     echo "        <li><a href='shop.php'><span class='glyphicon glyphicon-home'></span> Shop </a></li>";
-    echo "        <li><a href='impostazioni.php'><span class='glyphicon glyphicon-user'></span> $user </a></li>";
+    echo "        <li><a href='impostazioni.php'><span class='glyphicon glyphicon-cog'></span> Impostazioni </a></li>";
+
     echo "        <li><a href='carrello.php'><span class='glyphicon glyphicon-shopping-cart'></span> Carrello <span class='badge'> $count_carrello </span></a></li>";
+    echo "        <li><a href='impostazioni.php'><span class='glyphicon glyphicon-user'></span> $user </a></li>";
     echo "        <li><a href='logout.php'><span class='glyphicon glyphicon-log-out'></span> Logout</a></li>";
     echo "      </ul>";
     echo "    </div>";

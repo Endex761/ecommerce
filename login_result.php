@@ -9,7 +9,13 @@
   /*Inizializzo la sessione*/
   session_start();
 
-
+  if($_SERVER["REQUEST_METHOD"] == "GET")
+  {
+    if(!empty($_GET['email']))
+      $email = test_input($_GET['email']);
+    else
+      $email = false;
+  }
 
   //La variabile controlla se tutti i campi del form sono stati inizializati
   $formOk = true;
@@ -82,16 +88,19 @@
       $_SESSION['id_utente']  = $row['id_utente'];
       $_SESSION['nome']       = $row['nome'];
       $_SESSION['cognome']    = $row['cognome'];
-      reindirizza("shop.php");
+      if($email)
+        reindirizza("impostazioni.php#password_vecchia");
+      else
+        reindirizza("shop.php");
     }
     else
     {
-      errore("Password errata");
+      reindirizza("login.php?status=wrong_password");
     }
   }
   else
   {
-    errore("Email non presente");
+    reindirizza("login.php?status=wrong_email");
   }
 
   /* Chiudo la connessiona al database */

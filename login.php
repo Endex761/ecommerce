@@ -2,26 +2,39 @@
 
   include 'libreria.php';
 
-  //Se status == not_logged stampero' un messaggio di errore
-  $logged = true;
+  //Messaggio d'errore da stampare in base allo status
+  $errore = "";
+
+  //Email inserita automaticamente nel caso del recupero password
+  $email = "";
+
   if($_SERVER["REQUEST_METHOD"] == "GET")
   {
     if(isset($_GET['status']))
     {
       $status = test_input($_GET['status']);
       if($status == 'not_logged')
-        $logged = false;
+        $errore = "Devi effettuare l'accesso per accedere a questa pagina.";
+
+      if($status == 'wrong_password')
+        $errore = "La password inserita non corrisponde.";
+
+      if($status == 'wrong_email')
+        $errore = "L'e-mail inserita non corrisponde a nessun account.";
+    }
+
+    if(isset($_GET['email']))
+    {
+      $email = test_input($_GET['email']);
     }
   }
 
-  if($logged)
-  {
-    $errore = "";
-  }
+  if($email!="")
+    $imp = "?impostazioni=true";
   else
-  {
-      $errore = "Devi effettuare l'accesso per accedere a questa pagina.";
-  }
+    $imp = "";
+
+
 ?>
 
 <!DOCTYPE html>
@@ -55,14 +68,14 @@
           </div>
 
 
-        <form  class="" method="post" name="login-form" id="login" action="login_result.php">
+        <form  class="" method="post" name="login-form" id="login" action="login_result.php <?php echo $imp ?>">
             <div class="form-group"> <!-- form-attributes----------------------->
 
             <!-- E-mail -->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
                     <label for="email">E-mail</label>
-                    <input name="email" type="email" class="form-control input-sm" id="email"  required>
+                    <input name="email" type="email" class="form-control input-sm" id="email" value="<?php echo $email ?>" required>
                 </div>
             </div>
 
@@ -75,21 +88,19 @@
             </div>
 
 
-
-
             <!-- div che contiene il bottone sara una colonna da 12 -->
             <div class="col-xs-12">
 
               <!-- Bottone Accedi -->
-              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <div class=" col-xs-12">
                   <div class="form-group">
                       <button type="submit" id="form-submit" class="btn btn-info ">Accedi</button>
                   </div>
               </div>
 
+              <center><a href="recupero.php">Password dimenticata? </a></center>
 
             </div>
-
 
           </div>
         </form>

@@ -90,21 +90,21 @@
 
   function draw_singolo_ordine($id_prodotto, $nome_prodotto, $prezzo, $foto, $quantita)
   {
-    echo "<div class='col-xs-9 text-center' style='background-color:#F9F9F9; padding:5px; margin-bottom:5px;'>";
-    echo "  <div class='col-sm-3 col-xs-12'>";
+    echo "<div class='col-md-9 col-xs-12 text-center' style='background-color:#F9F9F9; padding:5px; margin-bottom:5px;'>";
+    echo "  <div class='col-md-3 col-xs-12'>";
     echo "    <a href='product_img/$foto'><img class='img-thumbnail' src='product_img/$foto' height='150px' width='150px'></a>";
     echo "  </div>";
-    echo "  <div class='col-sm-6 col-xs-12'>";
+    echo "  <div class='col-md-6 col-xs-12'>";
     echo "    <div class='col-xs-12'>";
     echo "     <h3 class='text-primary'> $nome_prodotto </h3>";
     echo "    </div>";
     echo "  </div>";
-    echo "  <div class='col-sm-3 col-xs-12'>";
+    echo "  <div class='col-md-3 col-xs-12'>";
     echo "    <div class='col-xs-12'>";
     echo "      <h4>Prezzo</h4>";
     echo "      <h3 style='color:green;'>€$prezzo</h3>";
     echo "    </div>";
-    echo "    <div class='col-xs-12'>";
+    echo "    <div class='col-md-12'>";
     echo "      <h5>Quantità:$quantita</h5>";
     echo "    </div>";
     echo "  </div>";
@@ -136,31 +136,31 @@
     echo "<div class='panel panel-default'>";
     echo "  <div class='panel-heading'>"; //Info sull'ordine complessivo
     echo "    <div class='row text-center'>";
-    echo "      <div class='col-xs-2'>";
+    echo "      <div class='col-md-2 col-xs-12'>";
     echo "        <strong>Ordine effettuato:</strong>";
     echo "        <br>";
     echo "        <p>$data_acquisto</p>";
     echo "      </div>";
-    echo "      <div class='col-xs-3'>";
+    echo "      <div class='col-md-3 col-xs-12'>";
     echo "        <strong>Indirizzo spedizione:</strong>";
     echo "        <br>";
     echo "        <p>$indirizzo_spedizione</p>";
     echo "      </div>";
-    echo "      <div class='col-xs-3'>";
+    echo "      <div class='col-md-3 col-xs-12'>";
     echo "        <strong>Indirizzo Fatturazione:</strong>";
     echo "        <br>";
     echo "        <p>$indirizzo_fatturazione</p>";
     echo "      </div>";
-    echo "      <div class='col-xs-1'>";
+    echo "      <div class='col-md-1 col-xs-12'>";
     echo "        <strong>Totale:</strong>";
     echo "        <br>";
     echo "        <p>€$totale</p>";
     echo "      </div>";
-    echo "      <div class='col-xs-2'>";
+    echo "      <div class='col-md-2 col-xs-12'>";
     echo "        <strong>Pagamento:</strong>";
     echo "        <p>****-****-****-$numero_carta</p>";
     echo "      </div>";
-    echo "      <div class='col-xs-1'>";
+    echo "      <div class='col-md-1 col-xs-12'>";
     echo "        <strong>ID Ordine:</strong>";
     echo "        <br>";
     echo "        <p>#$id_acquisto</p>";
@@ -171,6 +171,7 @@
     echo "  <div class='panel-body'>";//<!-- QUI DENTRO VANNO I SINGOLI ORDINI -->
     echo "    <div class='col-sm-3 col-xs-12 pull-right text-center'>";
     echo "      <h4>Stato consegna: In transito</h4>";
+    echo "      <a href='fattura.php?acquisto=$id_acquisto' target='_blank'><button class='btn btn-warning'>Visualizza la fattura</button></a>";
     echo "    </div>";
 
     $query = "SELECT prodotto.id_prodotto AS id_prodotto, prezzo_acquisto, quantita, foto, nome_prodotto FROM Prodotto, AcquistoSingolo WHERE id_acquisto=$id_acquisto AND prodotto.id_prodotto = acquistosingolo.id_prodotto;";

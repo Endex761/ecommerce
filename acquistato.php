@@ -9,6 +9,8 @@
 
   /*   */
 
+  $id_utente = $_SESSION['id_utente'];
+
   $connessione = connessione_db();
 
   if(isset($_COOKIE['carrello']))
@@ -41,6 +43,10 @@
     else
       $formOk = false;
 
+    if(!empty($_POST['checkbox']))
+      $indirizzo_fatturazione = $indirizzo_spedizione;
+      //Se la checkbox è ok imposto stesso indirizzo per entrambi.
+      
     if(!$formOk)
     {
       errore("Form non compilato correttamente");

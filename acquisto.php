@@ -129,7 +129,7 @@
            <div class="col-sm-9 col-xs-12">
              <input name="indirizzo_spedizione" type="text" class="form-control" value="<?php echo $indirizzo ?>">
              <br>
-             <label onclick="disableEnable('fatturazione');"><input id="checkbox" type="checkbox" checked> Utilizza questo indirizzo come indirizzo di fatturazione.</label>
+             <label onclick="disableEnable('fatturazione');"><input id="checkbox" name="checkbox" type="checkbox" checked> Utilizza questo indirizzo come indirizzo di fatturazione.</label>
              <br>
              <a href="impostazioni.php">Cambia indirizzo di spedizione predefinito.</a>
            </div>

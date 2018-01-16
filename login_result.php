@@ -9,14 +9,6 @@
   /*Inizializzo la sessione*/
   session_start();
 
-  if($_SERVER["REQUEST_METHOD"] == "GET")
-  {
-    if(!empty($_GET['impostazioni']))
-      $mail = test_input($_GET['impostazioni']);
-    else
-      $mail = false;
-  }
-
   //La variabile controlla se tutti i campi del form sono stati inizializati
   $formOk = true;
 
@@ -25,6 +17,10 @@
   //Se i dati sono inizializzati controllo che non ci sia codice malevolo con la funzione test_input
   if($_SERVER["REQUEST_METHOD"] == "POST")
   {
+    if(!empty($_GET['impostazioni']))
+      $mail = test_input($_GET['impostazioni']);
+    else
+      $mail = false;
 
     if(!empty($_POST['email']))
       $email = test_input($_POST['email']);
@@ -90,7 +86,6 @@
       $_SESSION['cognome']    = $row['cognome'];
       if($mail)
         reindirizza("impostazioni.php#password_vecchia");
-
       else
         reindirizza("shop.php");
     }

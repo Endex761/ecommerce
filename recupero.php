@@ -51,6 +51,10 @@
        $row = mysqli_fetch_assoc($result_set);
        $risposta_psw = $row['risposta_psw'];
      }
+     else
+     {
+       $risposta_psw = "";
+     }
 
      //Controllo se le due risposte combaciano
      if($risposta == $risposta_psw)
@@ -150,6 +154,9 @@
             <?php
               if($modificata)
                 echo ("<a href='login.php?email=$email'><button type='button' class='btn btn-warning'>Vai al login!</button></a>");
+              else
+                echo ("<a href='login.php?'><button type='button' class='btn btn-warning'>Vai al login!</button></a>");
+
             ?>
           </div>
         </div>

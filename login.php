@@ -30,9 +30,9 @@
   }
 
   if($email!="")
-    $imp = "?impostazioni=true";
+    $impostazioni = "<input type='text' name='impostazioni' value='true' style='disply:none;'>";
   else
-    $imp = "";
+    $impostazioni = "";
 
 
 ?>
@@ -68,9 +68,9 @@
           </div>
 
 
-        <form  class="" method="post" name="login-form" id="login" action="login_result.php <?php echo $imp ?>">
+        <form  class="" method="post" name="login-form" id="login" action="login_result.php">
             <div class="form-group"> <!-- form-attributes----------------------->
-
+            <?php echo $impostazioni //Codice che permette di andare direttamente alle impostazioni per resettare la password dopo il login?>
             <!-- E-mail -->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group">
@@ -78,6 +78,7 @@
                     <input name="email" type="email" class="form-control input-sm" id="email" value="<?php echo $email ?>" required>
                 </div>
             </div>
+
 
             <!-- Password -->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

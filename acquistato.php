@@ -54,7 +54,7 @@
   }
 
   //Creo un acquisto nel database
-  $query = "INSERT INTO Acquisto (data_acquisto,indirizzo_spedizione,indirizzo_fatturazione, id_utente, id_carta) values (CURDATE(),'$indirizzo_spedizione','$indirizzo_fatturazione',$id_carta,$id_carta);";
+  $query = "INSERT INTO Acquisto (data_acquisto,indirizzo_spedizione,indirizzo_fatturazione, id_utente, id_carta) values (CURDATE(),'$indirizzo_spedizione','$indirizzo_fatturazione',$id_utente,$id_carta);";
 
 
   //Invio la query al db

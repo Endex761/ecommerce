@@ -89,7 +89,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Rende responsive il tutto-->
-    <title>RS Furniture - Recupero Password </title>
+    <title>RS Furnitures - Recupero Password </title>
     <?php include_bootstrap(); ?>
 
   </head>

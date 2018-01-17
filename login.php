@@ -41,7 +41,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Rende responsive il tutto-->
-    <title>RS Furniture - Login </title>
+    <title>RS Furnitures - Login </title>
     <?php include_bootstrap(); ?>
 
   </head>

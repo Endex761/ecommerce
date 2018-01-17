@@ -7,7 +7,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Rende responsive il tutto-->
-    <title>RS Furniture - Registrazione </title>
+    <title>RS Furnitures - Registrazione </title>
     <?php include_bootstrap(); ?>
 
   </head>

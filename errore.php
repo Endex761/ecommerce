@@ -6,7 +6,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Rende responsive il tutto-->
-    <title>RS Furniture - Errore </title>
+    <title>RS Furnitures - Errore </title>
     <script src="js/functions.js"></script>
     <?php include_bootstrap(); ?>
 

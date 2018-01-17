@@ -58,7 +58,7 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Rende responsive il tutto-->
 	  <meta charset="utf-8">
-		<title>RS Furniture - Prodotti</title>
+		<title>RS Furnitures - Prodotti</title>
 		<?php include_bootstrap(); ?>
 
 		<style>

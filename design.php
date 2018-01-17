@@ -73,7 +73,7 @@
     echo "    <div class='col-xs-12'>";
     echo "      <h5>Quantità:$quantita</h5>";
 
-    if($quantita>1)
+    if($quantita>0)
       echo "      <a href='carrello.php?minus=$id_prodotto'><span class='glyphicon glyphicon-minus'></a>";
     else
       echo "      <a href='#'><span class='glyphicon glyphicon-minus'></a>";
@@ -221,14 +221,14 @@
     //User è il nome e il cognome dell'utente loggato da stampare nella nav
     //Count_carrello è il numero badge accanto al carrello e indica il numero di elementi nel carello
     echo "<nav class='navbar navbar-inverse'>";
-    echo "  <div class=''>";
+    echo "  <div>";
     echo "    <div class='navbar-header'>";
     echo "      <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#myNavbar'>";
     echo "        <span class='icon-bar'></span>";
     echo "        <span class='icon-bar'></span>";
     echo "        <span class='icon-bar'></span>";
     echo "      </button>";
-    echo "      <a class='navbar-brand' href='shop.php'>SR Furnitures</a>";
+    echo "      <a class='navbar-brand' href='shop.php'>RS Furnitures</a>";
     echo "    </div>";
     echo "    <div class='collapse navbar-collapse' id='myNavbar'>";
     echo "      <ul class='nav navbar-nav'>";

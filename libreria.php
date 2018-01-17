@@ -61,7 +61,7 @@
   /*Funzione che reindirizza alla pagina error_page.php e restituisce il valore di errore*/
   function errore($message)
   {
-    header("Location:" . "http://" . IP . "/ecommerce/error_page.php" . "?message=$message");
+    header("Location:" . "http://" . IP . "/ecommerce/errore.php" . "?message=$message");
     die();
   }
 

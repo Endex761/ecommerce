@@ -143,9 +143,11 @@
     <!--<link rel="stylesheet" type="text/css" href="css/basic.css">-->
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
     <meta charset="utf-8">
+    <title>RS Furniture - Impostazioni </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="js/functions.js"></script>
     <?php include_bootstrap(); ?>
+
   </head>
   <body>
     <?php

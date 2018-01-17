@@ -6,8 +6,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Rende responsive il tutto-->
-    <!--<link rel="stylesheet" type="text/css" href="css/basic.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="css/navbar.css">-->
+    <title>RS Furniture - Errore </title>
     <script src="js/functions.js"></script>
     <?php include_bootstrap(); ?>
 
@@ -18,7 +17,7 @@
       <h1>Si è verificato un errore</h1>
       <br>
       <h3 style="color:#AA0000;"><?php echo $message ?></h3>
-      <!--<a href="#" onclick="tornaIndietro()">Torna indietro</a>-->
+      <a href="#" onclick="tornaIndietro()">Torna indietro</a>
     </div>
   </body>
 

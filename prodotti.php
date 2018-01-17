@@ -57,9 +57,8 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Rende responsive il tutto-->
-	    <!--<link rel="stylesheet" type="text/css" href="css/basic.css">-->
-	    <!--<link rel="stylesheet" type="text/css" href="css/navbar.css">-->
 	  <meta charset="utf-8">
+		<title>RS Furniture - Prodotti</title>
 		<?php include_bootstrap(); ?>
 
 		<style>
@@ -76,7 +75,7 @@
 		</div>
 
 		<div class="col-xs-12">
-			<table class="table">
+			<table class="table table-bordered">
 				<thead>
 			      <tr >
 			        <th class="text-center">ID</th>
@@ -110,8 +109,8 @@
 			        	<td>1.jpeg</td>
 			      	</tr>-->
 			    	<?php
-							//Creo la query per controllare che i dati inseriti corrispondano a un account e che le credenziali siano giuste
-							$query = "SELECT * FROM prodotto;";
+							//Creo la query per prendere i prodotti nel database in ordine di disponibilita, i meno disponibili stanno in cima
+							$query = "SELECT * FROM prodotto ORDER BY disponibilita ASC;";
 
 							//Lancio la query e metto il risultato nel result_set
 							$result_set = mysqli_query($connessione, $query);
@@ -127,6 +126,7 @@
 							{
 								while($row = mysqli_fetch_assoc($result_set))
 								{
+									//Prendo i dati relativi a un singolo prodotto
 									$id_prodotto	  = $row['id_prodotto'];
 									$nome_prodotto  = $row['nome_prodotto'];
 									$descrizione    = $row['descrizione'];
@@ -134,12 +134,17 @@
 									$disponibilita 	= $row['disponibilita'];
 									$foto         	= $row['foto'];
 
+									//Le li stampo all'interno di una tabella
+
 									echo "<tr class='text-center'>";
 									echo "	<td>$id_prodotto</td>";
 									echo "	<td>$nome_prodotto</td>";
 									echo "	<td>$descrizione</td>";
 									echo "	<td>$prezzo</td>";
-									echo "	<td>$disponibilita <a href='prodotti.php?add=$id_prodotto'>Rifornisci</a></td>";
+									if($disponibilita == 0)
+										echo "<td style='color:red;'>$disponibilita <a href='prodotti.php?add=$id_prodotto'>Rifornisci</a></td>";
+									else
+										echo "<td>$disponibilita <a href='prodotti.php?add=$id_prodotto'>Rifornisci</a></td>";
 									echo "	<td>$foto</td>";
 									echo "	<td>";
 									echo "		<a href='delete_product.php?id=$id_prodotto'><span class='glyphicon glyphicon-trash'></span></a>";
@@ -148,18 +153,6 @@
 								}
 							}
 			    	?>
-
-						<!--<tr class= "text-center"> <!--riga per aggiungere un nuovo prodotto
-							<form action="add_product.php" method="POST" class="form-group" enctype="multipart/form-data">
-								<td></td>
-								<td><input class="form-control" type="text" name="nome-prodotto" placeholder="Nome prodotto"></td>
-								<td><input class="form-control" type="text" name="descrizione" placeholder="Descrizione"></td>
-								<td><input class="form-control" type="text" name="prezzo" placeholder="Prezzo"></td>
-								<td><input class="form-control" type="number" name="disponibilita" placeholder="Disponibilità"></td>
-								<td><input type="file" name="foto"  accept=".jpg, .jpeg, .png"></td>
-								<td><button type="submit" class="btn-link"><span class="glyphicon glyphicon-plus"></span></button></td>
-							</form>
-						</tr>-->
 			    </tbody>
 			</table>
 		</div>

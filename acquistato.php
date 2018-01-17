@@ -46,7 +46,7 @@
     if(!empty($_POST['checkbox']))
       $indirizzo_fatturazione = $indirizzo_spedizione;
       //Se la checkbox è ok imposto stesso indirizzo per entrambi.
-      
+
     if(!$formOk)
     {
       errore("Form non compilato correttamente");
@@ -165,8 +165,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Rende responsive il tutto-->
-    <!--<link rel="stylesheet" type="text/css" href="css/basic.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="css/navbar.css">-->
+    <title>RS Furniture - Acquisto Effettuato </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="js/functions.js"></script>

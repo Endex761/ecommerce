@@ -87,6 +87,12 @@
         $carrello[$minus] --;
       }
 
+      //Se la quantità è 1 e premo - rimuovo il prodotto dal carello
+      if(isset($carrello[$minus]) && $carrello[$minus] == 1)
+      {
+        unset($carrello[$minus]);
+      }
+
       //Setto il cookie serializzando l'array
       setcookie('carrello',serialize($carrello),time() + (86400 * GIORNI_SCADENZA_CARRELLO));
     }
@@ -156,7 +162,7 @@
  <html>
    <head>
      <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Rende responsive il tutto-->
-     <!--<link rel="stylesheet" type="text/css" href="css/basic.css">-->
+     <title>RS Furniture - Carrello </title>
      <link rel="stylesheet" type="text/css" href="css/navbar.css">
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1">

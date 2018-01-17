@@ -7,6 +7,7 @@
   if(!isset($_SESSION['id_utente']))
     reindirizza("login.php?status=not_logged");
 
+  $id_utente = $_SESSION['id_utente'];
   /*   */
 
 
@@ -24,7 +25,7 @@
 
     $connessione = connessione_db();
 
-    $query = "SELECT id_acquisto, nome, cognome, data_acquisto, acquisto.indirizzo_spedizione AS indirizzo_spedizione, indirizzo_fatturazione FROM utente,acquisto WHERE acquisto.id_acquisto = $id_acquisto AND acquisto.id_utente = utente.id_utente ";
+    $query = "SELECT utente.id_utente AS id_acquirente, id_acquisto, nome, cognome, data_acquisto, acquisto.indirizzo_spedizione AS indirizzo_spedizione, indirizzo_fatturazione FROM utente,acquisto WHERE acquisto.id_acquisto = $id_acquisto AND acquisto.id_utente = utente.id_utente ";
 
     //Invio la query al db
     $result_set = mysqli_query($connessione, $query);
@@ -41,25 +42,31 @@
       //Faccio il fetch dell'array associativo
       $row = mysqli_fetch_assoc($result_set);
 
+      $id_acquirente = $row['id_acquirente'];
+
+      //Se chi tenta di visualizzare la fattura non è chi l'ha generata viene visualizzato un messaggio d'errore.
+      if($id_acquirente != $id_utente)
+      {
+        errore("Non hai i permessi per visualizzare questa pagina.");
+        die();
+      }
+
       $nome = $row['nome'];
       $cognome = $row['cognome'];
       $data = $row['data_acquisto'];
       $indirizzo_spedizione = $row['indirizzo_spedizione'];
       $indirizzo_fatturazione = $row['indirizzo_fatturazione'];
     }
-
-
-
-
-
-
-
+    else
+    {
+      errore("Nessuna fattura disponibile.");
+    }
 
 ?>
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Rende responsive il tutto-->
-    <!--<link rel="stylesheet" type="text/css" href="css/basic.css">-->
+    <title>RS Furniture - Fattura </title>
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -82,10 +89,10 @@
         <strong>Data Acquisto:</strong><p><?php echo $data ?></p>
       </div>
       <div class="col-xs-6">
-        <strong>Indirizzo spedizone:</strong><p><?php echo $indirizzo_spedizione ?></p>
+        <strong>Indirizzo Spedizone:</strong><p><?php echo $indirizzo_spedizione ?></p>
       </div>
       <div class="col-xs-6 text-right">
-        <strong>Indirizzo fatturazione:</strong><p><?php echo $indirizzo_fatturazione ?></p>
+        <strong>Indirizzo Fatturazione:</strong><p><?php echo $indirizzo_fatturazione ?></p>
       </div>
     <table class="table table-bordered">
       <thead>
@@ -134,7 +141,7 @@
         ?>
 
         <tr>
-          <td colspan="2">Totale:</td>
+          <td class='text-right' colspan="2" >Totale:</td>
           <td class='text-center'>€<?php echo $totale ?></td>
         <tr>
 

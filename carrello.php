@@ -80,6 +80,12 @@
       //Prendo il valore di add e lo metto nella variabile dopo averlo testato
       $minus = test_input($_GET['minus']);
 
+      //Se la quantità è 1 e premo - rimuovo il prodotto dal carello
+      if(isset($carrello[$minus]) && $carrello[$minus] == 1)
+      {
+        unset($carrello[$minus]);
+      }
+
       //Se il prodotto è già presente nel carrello
       if(isset($carrello[$minus]) && $carrello[$minus]>1)
       {
@@ -87,11 +93,6 @@
         $carrello[$minus] --;
       }
 
-      //Se la quantità è 1 e premo - rimuovo il prodotto dal carello
-      if(isset($carrello[$minus]) && $carrello[$minus] == 1)
-      {
-        unset($carrello[$minus]);
-      }
 
       //Setto il cookie serializzando l'array
       setcookie('carrello',serialize($carrello),time() + (86400 * GIORNI_SCADENZA_CARRELLO));

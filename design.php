@@ -4,20 +4,30 @@
   // Questo file contiene funzioni in php per la creazione di parti
   // grafiche per il sito come title, footer, navbar ecc
 
-
+  /* Funzione draw_prodotto che prende come parametri le caratteristiche di un prodotto nel database
+     e le stampa in un panel. Nell pannel-heading verra' stampato il nome del prodotto.
+     All' interno del panel-body viene mostrata una foto del prodotto e la descrizione.
+     Nel panel-footer viene mostrato il prezzo del prodotto, se la disoponibilità è 0 mostra
+     il messaggio "Prodotto non disponibile". Viene inoltre stampato un pulsante per aggiungere
+     un istanza del prodotto all'interno del carrello.
+     La funzione viene utilizzata nella pagina shop.php */
   function draw_prodotto($id_prodotto, $nome_prodotto, $descrizione, $prezzo, $disponibilita, $foto)
   {
     //Stampa un singolo prodotto
+
+    //Variabile disable inizializzata a null, se la disponibilità è 0 viene impostata a "disable"
+    //e il pulzante per aggiungere il prodotto nel carrello viene disabilitato.
     $disabled = "";
+
+    //Script del pulsante per aggiungere il prodott al carello
     $script = "location.href = \"carrello.php?add=$id_prodotto\"";
-    //$disponibilita = 0;
 
     echo "<div class='col-sm-4 col-xs-12'>";
     echo " <div class='panel panel-primary'>";
     echo "  <div class='panel-heading text-center'>$nome_prodotto</div>";
     echo "    <div class='panel-body'>";
     echo "      <a href='product_img/$foto'><img src='product_img/$foto' class='img-responsive center-block' height='200px' width='200px'></a>";
-    echo "      <hr />";
+    echo "      <hr/>";
     echo "      <h4>Descrizone:</h4>";
     echo "      <center>";
     echo "        <p>$descrizione</p>";
@@ -25,24 +35,36 @@
     echo "    </div>";
     echo "    <div class='panel-footer'>";
     echo "      <center>";
-
     if($disponibilita==0)
     {
       echo "       <h3 style='color:red'>Prodotto non disponibile</h3>";
-      $disabled = "disabled"; //Se non dispobile disabilita il pulzante di acquisto
-      $script = ""; // E elimina il reindirizzamento
+
+      //Se non dispobile disabilita il pulzante di acquisto
+      $disabled = "disabled";
+
+      // E elimina il reindirizzamento altrimenti viene reindirizzato comunque
+      $script = "";
     }
     else
+    {
       echo "       <h3 style='color:green'>€ $prezzo </h3>";
-
+    }
     echo "         <button type='button' class='btn btn-primary $disabled' onclick='$script'>";
     echo "         <span class='glyphicon glyphicon-shopping-cart'></span> Aggiungi al carrello";
-    echo "        </button>";
-    echo "      </center>";
-    echo "    </div>";
-    echo "  </div>";
+    echo "         </button>";
+    echo "        </center>";
+    echo "     </div>";
+    echo "   </div>";
     echo "</div>";
   }
+
+  /*Funzione draw_prodotto_carrello prende come parametri le caratteristiche di un prodotto e lo stampa nel
+    formato del carrello con bottoni per la rimozione del prodotto dal carello, pulzanti per aumentare o
+    diminuire la quantità del prodotto all'interno del carello.
+    Se la disponibilità è minore o maggiore del numero di prodotti che vogliono essere aggiunti nel Carrello
+    i pulsanti + e - vengono disabilitati. Inoltre se il prodotto non  è disponibile per una qualunque ragione
+    viene stampato un messaggio che avverte l'utente che il prodotto non è dispobibile.
+    La funzione viene richiamata all'interno della pagina carello.php */
 
   function draw_prodotto_carrello($id_prodotto, $nome_prodotto, $prezzo, $disponibilita, $foto, $quantita)
   {
@@ -88,6 +110,10 @@
     echo "</div>";
   }
 
+  /*Funzione che stampa un singolo ordine all'interno della pagina ordini.php mostrando immagine
+  nome del prodotto prezzo d'acquisto e quantita del prodotto acquistato.
+  Questa funzione viene richiamata all'interno della funzone draw_prodotto*/
+
   function draw_singolo_ordine($id_prodotto, $nome_prodotto, $prezzo, $foto, $quantita)
   {
     echo "<div class='col-md-9 col-xs-12 text-center' style='background-color:#F9F9F9; padding:5px; margin-bottom:5px;'>";
@@ -111,11 +137,20 @@
     echo "</div>";
   }
 
+  /* Funzione che stampa un acquisto in un pannello.
+    Nell'header del pannello vengono stampati indirizzo di spedizione, fatturazione, numero carta, prezzo totale e id acquisto.
+    All'interno del body vengono stampati i vari prodotti acquistati attraverso la funzione draw_singolo_ordine.
+    Viene stampato inoltre lo stato della spedizione (Non implementato) e il pulzante per visualizzare la fattura dell'acqusito.
+    Questa funzione viene utilizzata nela pagina prodotti.php*/
+
   function draw_ordine($id_acquisto, $data_acquisto, $indirizzo_spedizione, $indirizzo_fatturazione, $numero_carta, $connessione)
   {
+    //Prendo gli ultimi 4 numeri del numero della carta.
     $numero_carta = substr($numero_carta, 15);
 
+    //Seleziono il totale dei prodotti acqustitai per stamparli nell'header.
     $query = "SELECT SUM(prezzo_acquisto*quantita) AS totale FROM Prodotto, AcquistoSingolo WHERE id_acquisto=$id_acquisto AND prodotto.id_prodotto = acquistosingolo.id_prodotto;";
+
     //Invio la query al db
     $result_set = mysqli_query($connessione, $query);
 
@@ -131,6 +166,11 @@
       //Faccio il fetch dell'array associativo
       $row = mysqli_fetch_assoc($result_set);
       $totale = $row['totale'];
+    }
+    else
+    {
+      //In caso di errore il prezzo sarà -1.
+      $totale = -1;
     }
 
     echo "<div class='panel panel-default'>";
@@ -167,13 +207,13 @@
     echo "      </div>";
     echo "    </div>";
     echo "  </div>";
-
     echo "  <div class='panel-body'>";//<!-- QUI DENTRO VANNO I SINGOLI ORDINI -->
     echo "    <div class='col-sm-3 col-xs-12 pull-right text-center'>";
     echo "      <h4>Stato consegna: In transito</h4>";
     echo "      <a href='fattura.php?acquisto=$id_acquisto' target='_blank'><button class='btn btn-warning'>Visualizza la fattura</button></a>";
     echo "    </div>";
 
+    //Seleziono tutte le informazioni di ogni acquisto singolo fatto dall'utente loggato
     $query = "SELECT prodotto.id_prodotto AS id_prodotto, prezzo_acquisto, quantita, foto, nome_prodotto FROM Prodotto, AcquistoSingolo WHERE id_acquisto=$id_acquisto AND prodotto.id_prodotto = acquistosingolo.id_prodotto;";
 
     //Invio la query al db
@@ -191,29 +231,36 @@
       //Faccio il fetch dell'array associativo
       while($row = mysqli_fetch_assoc($result_set))
       {
+        //Prendo i dati dei singoli oridni
         $id_prodotto    = $row['id_prodotto'];
         $nome_prodotto  = $row['nome_prodotto'];
         $prezzo         = $row['prezzo_acquisto'];
         $foto           = $row['foto'];
         $quantita       = $row['quantita'];
 
+        //Stampo il singolo ordine
         draw_singolo_ordine($id_prodotto, $nome_prodotto, $prezzo, $foto, $quantita);
       }
-
     }
 
     echo "  </div>";
     echo "</div>";
   }
 
+  /* Funzione che stampa il footer nelle pagine in cui è richiamata. */
   function draw_footer()
   {
     echo "<footer class='footer'>";
     echo "  <div class='col-xs-12 text-center' style='background:#F9F9F9; padding:10px;'>";
-    echo "    <span class='text-muted'>SR Furnitures Copyright @ 2017 Simon Pietro Romeo & Dario Stella</span>";
+    echo "    <span class='text-muted'>RS Furnitures Copyright @ 2018 Simon Pietro Romeo & Dario Stella</span>";
     echo "  </div>";
     echo "</footer>";
   }
+
+  /* Funzione che stampa la navbar all'interno della pagine in cui è richiamata.
+    Prende in ingresso la variabile $ricerca che imposta il valore dell'input all'ultima ricerca effettuata.
+    $user contiene il nome e il cognome dell'utente che è attualmente loggato e viene stampata nella navbar
+    $count_carrello contiene il numero di prodotti all'interno del carrello e li stampa come badge*/
 
   function draw_navbar($ricerca, $user, $count_carrello)
   {
@@ -241,10 +288,10 @@
     echo "          </div>";
     echo "        </form>";
     echo "      </ul>";
+    //Qui stampo i link che stanno sulla destra della navbar
     echo "      <ul class='nav navbar-nav navbar-right'>";
     echo "        <li><a href='shop.php'><span class='glyphicon glyphicon-home'></span> Shop </a></li>";
     echo "        <li><a href='impostazioni.php'><span class='glyphicon glyphicon-cog'></span> Impostazioni </a></li>";
-
     echo "        <li><a href='carrello.php'><span class='glyphicon glyphicon-shopping-cart'></span> Carrello <span class='badge'> $count_carrello </span></a></li>";
     echo "        <li><a href='ordini.php'><span class='glyphicon glyphicon-user'></span> $user </a></li>";
     echo "        <li><a href='logout.php'><span class='glyphicon glyphicon-log-out'></span> Logout</a></li>";
@@ -254,6 +301,9 @@
     echo "</nav>";
 
   }
+
+  /* Funzione che stampa le informazioni delle carte di credito inserite dell'utente all'interno della pagina
+    acquisto.php e ne permette la selezione per poi procedere all'acquisto.*/
 
   function draw_carta($id_carta, $intestatario, $numero_carta, $mese_scadenza, $anno_scadenza, $codice_sicurezza, $denominazione)
   {
@@ -301,7 +351,7 @@
     echo "</div>";
   }
 
-
+  //Funzione che importa il framework bootstrap cdn e ajax nelle pagine in cui è richiamato.
   function include_bootstrap()
   {
     echo "<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>";

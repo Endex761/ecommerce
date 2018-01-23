@@ -5,6 +5,7 @@
   /*Avvio la sessione e controllo che il login sia stato effettuato*/
   session_start();
 
+  //Se la sessione non è impostata reindirizzo l'utente al login con stato "not_logged"
   if(!isset($_SESSION['id_utente']))
     reindirizza("login.php?=not-logged");
     /*   */

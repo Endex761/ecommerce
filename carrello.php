@@ -1,10 +1,21 @@
 <?php
+  /*
+  File:carrello.php
+  Questo file contine lo script php per mostrare gli elementi presenti all'interno del carrello dell'utente.
+  Il carrello è stato implementato utilizzando i cookie.
+  All'interno della variabile $_COOKIE['carrello'] viene memorizzato un array associativo.
+  L'array in questione ha per chiave l'id del prodotto che l'utente ha inserito nel carrello, e
+  come valore la quantita di prodotto che vuole acquistare.
+  Lo script oltre che a mostrare il contenuto attraverso la funzione draw_prodotto_carrello consente
+  attraverso il metodo GET di incrementare, diminuire o rimuovere un prodotto dal carrello.
+  */
 
   include 'libreria.php';
 
   /*Avvio la sessione e controllo che il login sia stato effettuato*/
   session_start();
 
+  //Se la sessione non è impostata reindirizzo l'utente al login con stato "not_logged"
   if(!isset($_SESSION['id_utente']))
     reindirizza("login.php?status=not_logged");
   /*   */
@@ -34,11 +45,13 @@
   //Se sto usando il metodo GET
   if($_SERVER["REQUEST_METHOD"] == "GET")
   {
+    //AUMENTO DI UNA UNITA' DELLA QUANTITA' DEL PRODOTTO
     if(isset($_GET['add']))
     {
       //Prendo il valore di add e lo metto nella variabile dopo averlo testato
       $add = test_input($_GET['add']);
 
+      //Seleziono la disponibilità del prodotto di cui voglio aumentare la quantità
       $query = "SELECT disponibilita FROM Prodotto WHERE id_prodotto=$add";
 
       //Invio la query al db
@@ -74,7 +87,7 @@
       setcookie('carrello',serialize($carrello),time() + (86400 * GIORNI_SCADENZA_CARRELLO));
     }
 
-    //Diminuisce di uno la quantità del prodotto
+    //DIMINUZIONE DI UNA UNITA' DELLA QUANTITA' DEL PRODOTTO
     if(isset($_GET['minus']))
     {
       //Prendo il valore di add e lo metto nella variabile dopo averlo testato
@@ -93,12 +106,11 @@
         $carrello[$minus] --;
       }
 
-
       //Setto il cookie serializzando l'array
       setcookie('carrello',serialize($carrello),time() + (86400 * GIORNI_SCADENZA_CARRELLO));
     }
 
-    //rimuove il prodotto dal carrello
+    // RIMOZIONE PRODOTTO DAL CARRELLO
     if(isset($_GET['remove']))
     {
       //Prendo il valore di add e lo metto nella variabile dopo averlo testato
@@ -115,12 +127,12 @@
       setcookie('carrello',serialize($carrello),time() + (86400 * GIORNI_SCADENZA_CARRELLO));
     }
   }
-  else
+  else //Se non sto usando il metodo get.
   {
     errore("Errore Generale.");
   }
 
-  //Calcola quandi articoli ci sono nel carrello.
+  //Calcola quanti articoli ci sono nel carrello.
   $count_carrello = 0;
   foreach ($carrello as $value)
     $count_carrello += $value;
@@ -156,8 +168,6 @@
     }
   } //Fine calcolo totale
 
-
-  //print_r($carrello);
  ?>
 
  <html>

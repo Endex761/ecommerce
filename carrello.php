@@ -52,7 +52,7 @@
       $add = test_input($_GET['add']);
 
       //Seleziono la disponibilità del prodotto di cui voglio aumentare la quantità
-      $query = "SELECT disponibilita FROM Prodotto WHERE id_prodotto=$add";
+      $query = "SELECT disponibilita FROM Prodotto WHERE id_prodotto=$add;";
 
       //Invio la query al db
       $result_set = mysqli_query($connessione, $query);
@@ -142,7 +142,7 @@
 
   foreach ($carrello as $id_prodotto => $quantita)
   {
-    $query = "SELECT prezzo FROM Prodotto WHERE id_prodotto=$id_prodotto";
+    $query = "SELECT prezzo FROM Prodotto WHERE id_prodotto=$id_prodotto;";
 
     //Invio la query al db
     $result_set = mysqli_query($connessione, $query);

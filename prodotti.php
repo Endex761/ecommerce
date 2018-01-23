@@ -20,7 +20,7 @@
 				//Prendo il valore di add e lo metto nella variabile dopo averlo testato
 				$add = test_input($_GET['add']);
 
-				$query = "SELECT disponibilita FROM Prodotto WHERE id_prodotto=$add";
+				$query = "SELECT disponibilita FROM Prodotto WHERE id_prodotto=$add;";
 
 				//Invio la query al db
 				$result_set = mysqli_query($connessione, $query);
@@ -39,7 +39,7 @@
 					$disponibilita = $row['disponibilita'];
 				}
 				$disponibilita_aggiornata = $disponibilita + 1;
-				$query_rifornimento = "UPDATE prodotto SET disponibilita=$disponibilita_aggiornata WHERE id_prodotto=$add";
+				$query_rifornimento = "UPDATE prodotto SET disponibilita=$disponibilita_aggiornata WHERE id_prodotto=$add;";
 
 				//Invio la query al db
 				$result_set = mysqli_query($connessione, $query_rifornimento);

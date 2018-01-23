@@ -1,9 +1,9 @@
 <?php
 
   /*
-  File: acqusitato.php
+  File: acquistato.php
   Lo script consente di inserire all'interno del database l'acquisto degli articoli presenti all'interno del carello.
-  Una volta acqusitati aggiorna la disponibilità dei prodotti all'interno del database.
+  Una volta acquistati aggiorna la disponibilità dei prodotti all'interno del database.
   */
 
   //Includiamo la libreria di funzioni e costanti definite nel file libreria.php

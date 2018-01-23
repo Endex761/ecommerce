@@ -201,7 +201,7 @@
                  <div class='col-sm-9 col-xs-8'>
                    <div class='form-group'>
                      <label for='numero_carta'>Numero Carta</label>
-                     <input name='numero_carta' type='text' onkeypress="numeroCarta(this);" class='form-control' id='numero_carta'  maxlength="19" placeholder="nnnn-nnnn-nnnn-nnnn" >
+                     <input name='numero_carta' type='text' onkeypress="numeroCarta(this);" class='form-control' id='numero_carta'  maxlength="19">
                    </div>
                  </div>
                  <div class='col-sm-3 col-xs-4'>
@@ -215,13 +215,13 @@
                  <div class='col-xs-6'>
                    <div class='form-group'>
                      <label for='mese_scadenza'>Mese Scadenza</label>
-                     <input name='mese_scadenza' type='text' class='form-control' id='mese_scadenza'  maxlength="2">
+                     <input name='mese_scadenza' oninput="return checkMonth(this);" type='text' class='form-control' id='mese_scadenza'  maxlength="2">
                    </div>
                  </div>
                  <div class='col-xs-6'>
                    <div class='form-group'>
                      <label for='anno_scadenza'>Anno Scadenza</label>
-                     <input name='anno_scadenza' type='text' class='form-control' id='anno_scadenza'  maxlength="4">
+                     <input name='anno_scadenza' oninput="return checkYear(this)" type='text' class='form-control' id='anno_scadenza'  maxlength="4">
                    </div>
                  </div>
                  <div class="col-xs-6">

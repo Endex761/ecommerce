@@ -1,5 +1,5 @@
 <?php
-  /* libreria.php created by Simon Pietro 22/11/2017-01:14 */
+  /* libreria.php created 22/11/2017-01:14 */
   //Questo file contiene le funzioni per la gestione del database in mysqli
   //Questo file dovrà essere incluso per la gestione delle connessioni al db
 
@@ -27,7 +27,7 @@
   define("DB_NAME","ecommerce");
 
   /* Email administrator */
-  define("ADMIN_EMAIL","admin@srfurniture.it");
+  define("ADMIN_EMAIL","admin@rsfurniture.it");
 
   /* Passwrrd administrator */
   define("ADMIN_PASSWORD","administrator");

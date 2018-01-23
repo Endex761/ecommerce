@@ -26,7 +26,7 @@
 
     $connessione = connessione_db();
 
-    $query = "SELECT utente.id_utente AS id_acquirente, id_acquisto, nome, cognome, data_acquisto, acquisto.indirizzo_spedizione AS indirizzo_spedizione, indirizzo_fatturazione FROM utente,acquisto WHERE acquisto.id_acquisto = $id_acquisto AND acquisto.id_utente = utente.id_utente ";
+    $query = "SELECT utente.id_utente AS id_acquirente, id_acquisto, nome, cognome, data_acquisto, acquisto.indirizzo_spedizione AS indirizzo_spedizione, indirizzo_fatturazione FROM utente,acquisto WHERE acquisto.id_acquisto = $id_acquisto AND acquisto.id_utente = utente.id_utente;";
 
     //Invio la query al db
     $result_set = mysqli_query($connessione, $query);
@@ -148,7 +148,7 @@
 
       </tbody>
     </table>
-    <center><button class="btn btn-primary" onclick="print();">Stampa!</button></center>
+    <center><button class="btn btn-primary" onclick="print();">Stampa</button></center>
   </div>
   </body>
 </html>

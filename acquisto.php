@@ -50,7 +50,7 @@
   foreach ($carrello as $id_prodotto => $quantita)
   {
     //Seleziono il prezzo del prodotto
-    $query = "SELECT prezzo FROM Prodotto WHERE id_prodotto=$id_prodotto";
+    $query = "SELECT prezzo FROM Prodotto WHERE id_prodotto=$id_prodotto;";
 
     //Invio la query al db
     $result_set = mysqli_query($connessione, $query);

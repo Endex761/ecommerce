@@ -1,5 +1,11 @@
 <?php
 
+  /*
+    File: shop.php
+    Il file consente di mostrare i prodotti all'interno del database e di effettuare ricerche in base a parole chiave.
+  */
+
+  //Includo la libreria di base
   include "libreria.php";
 
   /*Avvio la sessione e controllo che il login sia stato effettuato*/
@@ -20,6 +26,8 @@
 
   //Seleziona 9 prodotti casuali da mostrare nello shop
   $search_query = "SELECT * FROM prodotto WHERE disponibilita > 0 ORDER BY rand() LIMIT 9;";
+
+  //Creo la variabile di ricerca
   $ricerca = "";
 
   if($_SERVER["REQUEST_METHOD"] == "GET")
@@ -34,10 +42,6 @@
     }
   }
 
-
-
-
-
  ?>
 <html>
   <head>
@@ -51,42 +55,10 @@
   <body>
 
     <?php
+      //Disegno la navbar e gli passo il campo di ricerca appena effettuato
       $user = $_SESSION['nome'] . " " . $_SESSION['cognome'];
       draw_navbar($ricerca,$user, count_carrello());
     ?>
-
-    <!--<nav class="navbar navbar-inverse">
-    <div class="">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">SR Furnitures</a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <form class="navbar-form navbar-left" id="navBarSearchForm"  action="shop.php" method="get">
-            <div class="input-group">
-              <input name="ricerca" type="text" class="form-control" value="" placeholder="Mobili, Comodini, Sedie .." >
-              <div class="input-group-btn">
-                <button class="btn btn-default" type="submit">Cerca</button>
-              </div>
-            </div>
-          </form>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Simon Pietro </a></li>
-          <li><a href="carrello.php"><span class="glyphicon glyphicon-shopping-cart"></span> Carrello <span class="badge"></span></a></li>
-          <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>-->
-
-
-
 
     <div class="container-fluid">
       <div class="col-xs-12 text-center">
@@ -113,19 +85,25 @@
             //Controllo se ci sono righe nel risultato
             if(mysqli_num_rows($result_set) > 0)
             {
+              //Counter mi serve per stampare i prodotti a riga ogni 3 prodotti stampati creo una riga
               $counter = 0;
+
               echo "<div class='row'>";
               //Faccio il fetch dell'array associativo
               while($row = mysqli_fetch_assoc($result_set))
               {
+                //Prendo le caratteristiche del prodotto
                 $id_prodotto    = $row['id_prodotto'];
                 $nome_prodotto  = $row['nome_prodotto'];
                 $descrizione    = $row['descrizione'];
                 $prezzo         = $row['prezzo'];
                 $disponibilita  = $row['disponibilita'];
                 $foto           = $row['foto'];
+
                 //stampo il prodotto
                 draw_prodotto($id_prodotto, $nome_prodotto, $descrizione, $prezzo, $disponibilita, $foto);
+
+                //Aumento il counter
                 $counter++;
 
                 //Ogni tre prodotti chiudo una riga.
@@ -139,6 +117,7 @@
             }
             else
             {
+              //Se non ci sono righe nel result_set stampo "nessun risultato.".
               echo "<h3 class='text-center'> Nessun risultato. </h3>";
             }
           ?>
@@ -153,6 +132,6 @@
 </html>
 
 <?php
-
+  //Chiudo la connessione al db
   mysqli_close($connessione);
  ?>

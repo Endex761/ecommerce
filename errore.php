@@ -1,5 +1,8 @@
 <?php
+  //Includo la libreria
   include "libreria.php";
+
+  //Prendo il messaggio passatomi dal GET
   $message = $_GET['message'];
  ?>
 

@@ -1,5 +1,12 @@
 <?php
 
+	/*
+		File: prodotti.php
+		IL file consente di stampare una tabella contente tutte le informazioni riguardanti i prodotti all'interno del database
+		Consente di eliminare, aggiungere o rifornire i vari prodotti prodotti.
+		I prodotti sono ordinati in modo da mostrare quelli con un disponibilità minore più in alto.
+	*/
+	//Includo la libreria di base
 	include "libreria.php";
 
 	/*Avvio la sessione e controllo che il login sia stato effettuato*/
@@ -11,15 +18,18 @@
 
     /*   */
 
+		//Creo la connessione al db
 		$connessione = connessione_db();
 
 		if($_SERVER["REQUEST_METHOD"] == "GET")
 		{
+			//Se add è settato aumentimo di 1 la disponibilità del prodotto
 			if(isset($_GET['add']))
 			{
 				//Prendo il valore di add e lo metto nella variabile dopo averlo testato
 				$add = test_input($_GET['add']);
 
+				//Prendo la disponibilità del prodotto che intendo rifornire
 				$query = "SELECT disponibilita FROM Prodotto WHERE id_prodotto=$add;";
 
 				//Invio la query al db
@@ -38,7 +48,10 @@
 					$row = mysqli_fetch_assoc($result_set);
 					$disponibilita = $row['disponibilita'];
 				}
+				//Aumento la disponibilità di uno
 				$disponibilita_aggiornata = $disponibilita + 1;
+
+				//E la inserisco nel database
 				$query_rifornimento = "UPDATE prodotto SET disponibilita=$disponibilita_aggiornata WHERE id_prodotto=$add;";
 
 				//Invio la query al db
@@ -51,7 +64,6 @@
 				}
 			}
 		}
-
 
 ?>
 
@@ -142,6 +154,8 @@
 									echo "	<td>$nome_prodotto</td>";
 									echo "	<td>$descrizione</td>";
 									echo "	<td>$prezzo</td>";
+
+									//Se la disponibilità è 0 coloro il numero di ROSSO
 									if($disponibilita == 0)
 										echo "<td style='color:red;'>$disponibilita <a href='prodotti.php?add=$id_prodotto'>Rifornisci</a></td>";
 									else

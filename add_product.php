@@ -4,6 +4,7 @@
     Il file contiene il codice necessario per aggiungere un prodotto al database
   */
 
+  //Includo la libreria di base.
   include 'libreria.php';
 
   /*Avvio la sessione e controllo che il login sia stato effettuato*/
@@ -59,15 +60,27 @@
     die();
   }
 
+  //Prendo il nome grezzo del file es: foto.jpg
   $nome_file = basename($_FILES["foto"]["name"]);
+
+  //Cartella di destinazione dell'immagine.
   $target_dir = "product_img/";
+
+  //Nome del file da posizionare nella cartella.
   $target_file = $target_dir . basename($_FILES["foto"]["name"]);
+
+  //Flag di controllo
   $uploadOk = true;
+
+  //Prendiamo l'estensione dell'immagine
   $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-  // Check if image file is a actual image or fake image
+
+  // Controlla se il file caricato è un immagine
   if(isset($_POST["submit"]))
   {
+    //Return FALSE on failure
     $check = getimagesize($_FILES["foto"]["tmp_name"]);
+
     if($check != false)
     {
         $uploadOk = true;
@@ -76,16 +89,8 @@
     {
         $uploadOk = false;
         errore("Il file non è una foto.");
-
     }
   }
-
-  // Controlla se il file esiste
-  /*if (file_exists($target_file))
-  {
-      errore("File già presente.");
-      $uploadOk = false;
-  }*/
 
   // Verifica il formato del file
   if($imageFileType != "jpg" && $imageFileType != "jpeg")
@@ -94,18 +99,22 @@
       $uploadOk = false;
   }
 
+  //Verifichiamo che il flag è ok
   if ($uploadOk == false)
-   {
+  {
       errore("File non caricato.");
   }
   else //Se è tutto ok prova a caricare il file.
   {
+      //La funzione sposta il file nella cartella target, se fallisce ritorna false
       if (move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file))
       {
-          $nome_file = basename($_FILES["foto"]["name"]);
+        //Prendo il nome del file appena caricato.
+        $nome_file = basename($_FILES["foto"]["name"]);
       }
       else
       {
+          //Stampiamo un messaggio d'errore
           errore("C'è stato un problema nel caricamento del file." . print_r($_FILES,true));
           die();
       }
@@ -114,7 +123,7 @@
   //Mi connetto al db per inserire i dati nel database
   $connessione = connessione_db();
 
-  //Creo la query per inserire i dati
+  //Creo la query per inserire i dati e il nome della foto nel database
   $query = "INSERT INTO Prodotto (nome_prodotto,descrizione,prezzo,disponibilita,foto) VALUES ('$nome_prodotto','$descrizione',$prezzo,$disponibilita,'$nome_file');";
 
   //Lancio la query e metto il risultato nel result_set
@@ -148,12 +157,13 @@
     //Prendo l'id_prodotto
     $id = $row['id_prodotto'];
 
+    //Aggiungo all'id prodotto l'estenzione .jpg così facendo avro' tutte le foto di un prodotto con nome id.jpg es 1.jpg
     $id = $id . ".jpg";
 
     //Rinomino il file con il nome dell'id prodotto
     rename ($target_file, $target_dir . $id);
 
-    //update del nome del file sul database
+    //Update del nome del file sul database
     $query = "UPDATE Prodotto SET foto='$id' WHERE foto = '$nome_file' AND nome_prodotto = '$nome_prodotto' AND prezzo = $prezzo;";
 
     //Lancio la query e metto il risultato nel result_set
@@ -170,8 +180,10 @@
     errore("Errore generale.");
   }
 
+  //Chiudo la connessione al database
   mysqli_close($connessione);
 
+  //Reindirizzo l'admin alla pagina dei prodotti.
   reindirizza("prodotti.php");
 
   ?>

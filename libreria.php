@@ -88,8 +88,11 @@
       //Prendo il cookie e lo assegno al carrello
       $carrello = unserialize($_COOKIE['carrello']);
       $count = 0;
+
+      //Per ogni prodotto all'interno del carello
       foreach ($carrello as $value)
       {
+        //Aggiungo al contatore la quantità che si intende acquistare
         $count += $value;
       }
 

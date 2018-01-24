@@ -8,24 +8,29 @@
   if(!isset($_SESSION['id_utente']))
     reindirizza("login.php?status=not_logged");
 
+  //Prendiamo l'id utente loggato
   $id_utente = $_SESSION['id_utente'];
   /*   */
 
-
+    //Se c'è una richiesta di tipo get
     if($_SERVER["REQUEST_METHOD"] == "GET")
     {
       if(!empty($_GET['acquisto']))
       {
+        //Prendiamo l'id acquasto passato dal get
         $id_acquisto = test_input($_GET['acquisto']);
       }
       else
       {
+        //Altrimenti ritorniamo agli ordini
         reindirizza("ordini.php");
       }
     }
 
+    //Mi connetto al database
     $connessione = connessione_db();
 
+    //Richiedo l'id dell'utente, id acquisto ecc.. dei prodotti acquistati in un ordine
     $query = "SELECT utente.id_utente AS id_acquirente, id_acquisto, nome, cognome, data_acquisto, acquisto.indirizzo_spedizione AS indirizzo_spedizione, indirizzo_fatturazione FROM utente,acquisto WHERE acquisto.id_acquisto = $id_acquisto AND acquisto.id_utente = utente.id_utente;";
 
     //Invio la query al db
@@ -43,8 +48,10 @@
       //Faccio il fetch dell'array associativo
       $row = mysqli_fetch_assoc($result_set);
 
+      //Prendo l'id dell'acquirente
       $id_acquirente = $row['id_acquirente'];
 
+      //E lo confronto con quello dell'utente loggato
       //Se chi tenta di visualizzare la fattura non è chi l'ha generata viene visualizzato un messaggio d'errore.
       if($id_acquirente != $id_utente)
       {
@@ -52,13 +59,14 @@
         die();
       }
 
+      //Altrimenti prendo le informazioni dalla query
       $nome = $row['nome'];
       $cognome = $row['cognome'];
       $data = $row['data_acquisto'];
       $indirizzo_spedizione = $row['indirizzo_spedizione'];
       $indirizzo_fatturazione = $row['indirizzo_fatturazione'];
     }
-    else
+    else //Se non ci sono righe nel risultato non ci sono fatture.
     {
       errore("Nessuna fattura disponibile.");
     }
@@ -105,6 +113,7 @@
       </thead>
       <tbody>
         <?php
+        //Prendiamo quantita, nome e prezzo da ogni singolo prodotto all'interno dell'acquisto
         $query = "SELECT quantita, nome_prodotto, prezzo_acquisto FROM acquistosingolo,prodotto WHERE id_acquisto=$id_acquisto AND acquistosingolo.id_prodotto = prodotto.id_prodotto;";
 
         //Invio la query al db
@@ -123,14 +132,18 @@
           //Faccio il fetch dell'array associativo
           while($row = mysqli_fetch_assoc($result_set))
           {
+            //Prendiamo i dati dalla query
             $quantita = $row['quantita'];
             $prodotto = $row['nome_prodotto'];
             $prezzo   = $row['prezzo_acquisto'];
 
+            //Calcoliamo il prezzo per la quantità
             $prezzo *= $quantita;
 
+            //Calcoliamo il totale speso
             $totale += $prezzo;
 
+            //Stampiamo il tutto all'interno di una riga della tabella
             echo "<tr>";
             echo "  <td class='text-center'>$quantita</td>";
             echo "  <td class=''>$prodotto</td>";
@@ -141,6 +154,7 @@
 
         ?>
 
+        <!-- nell'ultima riga stampiamo il totale -->
         <tr>
           <td class='text-right' colspan="2" >Totale:</td>
           <td class='text-center'>€<?php echo $totale ?></td>
@@ -152,3 +166,7 @@
   </div>
   </body>
 </html>
+<?php
+  //Chiudo la connessione al db
+  mysqli_close($connessione);
+ ?>

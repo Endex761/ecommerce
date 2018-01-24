@@ -1,5 +1,13 @@
 <?php
 
+  /*
+    File:recupero.php
+    Il file consente, dopo aver inserito l'email  e la domanda di sicurezza, di resettare la password
+    La password verra impostata a "12345678" e verrà consigliato all'utente di cambiarla
+    Effettuando l'accesso dopo aver recuperato la password si verrà indirizzati alle impostazioni
+  */
+
+  //Includiamo la libreria di base
   include 'libreria.php';
 
   //Messaggio che avvere l'utente sull'esito dell'operazione, verrà modificato più avanti nel codice.
@@ -49,10 +57,13 @@
      {
        //Faccio il fetch dell'array associativo
        $row = mysqli_fetch_assoc($result_set);
+
+       //Prendo la risposta di sicurezza
        $risposta_psw = $row['risposta_psw'];
      }
      else
      {
+       //Se non ci sono risultati imposto la risposta a "".
        $risposta_psw = "";
      }
 
@@ -72,16 +83,21 @@
         die(mysqli_error($connessione));
       }
 
+      //Messaggio che informa l'utente che la password è stata modificata
       $messaggio = "La tua password è stata modifica in '12345678', ti consigliamo di cambiarla nelle impostazioni.";
       $modificata = true;
 
      }
      else
      {
+       //Messaggio che avverte l'utente che la password non è stata modificata
        $messaggio = "Risposta errata, password non recuperata, riprova.";
      }
 
   }
+
+  //Chiudo la connessione al db
+  mysqli_close($connessione);
 
  ?>
 
@@ -151,6 +167,8 @@
           <hr />
           <div class="col-xs-12 text-center">
             <?php
+              //Se modificata reindirizzo l'utente al login fornendo al GET l'email dell'Utente
+              //Questo mi permette di indirizzarlo direttamente alle impostazioni dopo aver cambiato la password
               if($modificata)
                 echo ("<a href='login.php?email=$email'><button type='button' class='btn btn-warning'>Vai al login!</button></a>");
               else

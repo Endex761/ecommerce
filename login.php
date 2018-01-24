@@ -1,5 +1,9 @@
 <?php
 
+  /*
+    File:login.php
+    Il file consente ad un utente già registrato o ad un admin di effettuare l'accesso al sitoweb
+  */
   include 'libreria.php';
 
   //Messaggio d'errore da stampare in base allo status
@@ -12,23 +16,31 @@
   {
     if(isset($_GET['status']))
     {
+      //Prendo lo status dal GET
       $status = test_input($_GET['status']);
+
+      //Status non loggato
       if($status == 'not_logged')
         $errore = "Devi effettuare l'accesso per accedere a questa pagina.";
 
+      //Status password errata
       if($status == 'wrong_password')
         $errore = "La password inserita non corrisponde.";
 
+      //Status nessuna e-mail presente
       if($status == 'wrong_email')
         $errore = "L'e-mail inserita non corrisponde a nessun account.";
     }
 
+    //Questo campo solitamente è imostata quando si effettual il cambio della password
     if(isset($_GET['email']))
     {
+      //Se è impostato prendo l'email
       $email = test_input($_GET['email']);
     }
   }
 
+  //Se l'email non è nulla reindirizzo l'utente alle impostazioni dopo il login
   if($email!="")
     $impostazioni = "<input type='text' name='impostazioni' value='true' style='disply:none;'>";
   else
@@ -119,11 +131,6 @@
   <?php
     draw_footer();
   ?>
-  <!--<footer>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="footer">
-      <p>SR Furnitures Copyright @ 2017 Simon Pietro Romeo & Dario Stella</p>
-    </div>
-  </footer> -->
 
   <script type="text/javascript" src="js/functions.js"></script>
   </body>

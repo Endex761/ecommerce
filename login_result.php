@@ -91,11 +91,13 @@
     }
     else
     {
+      //Se la password non corrisponde
       reindirizza("login.php?status=wrong_password");
     }
   }
   else
   {
+    //Se non esiste nessun account con la mail inserita
     reindirizza("login.php?status=wrong_email");
   }
 

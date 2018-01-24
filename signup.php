@@ -1,5 +1,11 @@
 <?php
 
+  /*
+    File:signup.php
+
+    Il file consete ad un nuovo utente di registrarti fornendo le informazioni richiesta nel form
+    Se si è già registrati è possibile passare al login
+  */
   include 'libreria.php';
  ?>
 
@@ -13,7 +19,7 @@
   </head>
   <body>
 
-    <section >
+    <section>
       <div class="container-fluid col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
 
@@ -128,17 +134,6 @@
   <?php
     draw_footer();
   ?>
-
-  <!--<footer>
-    <div class="col-xs-12 text-center" id="footer">
-      <p>SR Furnitures Copyright @ 2017 Simon Pietro Romeo & Dario Stella</p>
-    </div>
-  </footer>-->
-<!--  <footer class="footer">
-      <div class="col-xs-12 text-center" style="background:#F9F9F9; padding:10px;">
-        <span class="text-muted">SR Furnitures Copyright @ 2017 Simon Pietro Romeo & Dario Stella</span>
-      </div>
-  </footer> -->
 
   <script type="text/javascript" src="js/functions.js"></script>
   </body>

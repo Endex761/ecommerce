@@ -5,6 +5,7 @@
     Il file contiene il codice necessario per inserire un nuovo utente all'interno del database
   */
 
+  //Aggiungo la libreria di base
   include 'libreria.php';
 
   /*Avvio la sessione e controllo che il login sia stato effettuato*/
@@ -83,5 +84,9 @@
   }
   else
   {
+    //Reindirizzo l'utente alle impostazioni
     reindirizza("impostazioni.php");
   }
+  //Chiudo la connessione al database
+  mysqli_close($connessione);
+?>

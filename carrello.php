@@ -182,6 +182,7 @@
    <body>
 
      <?php
+      //Prendo il nome e il cognome dell'utente loggato e disegno la navbar
         $user = $_SESSION['nome'] . " " . $_SESSION['cognome'];
         draw_navbar("", $user, $count_carrello);
       ?>
@@ -215,10 +216,13 @@
           <div class="col-sm-9 col-xs-12" style="border: 2px solid #F9F9F9; border-radius: 5px; padding:5px; ">
 
           <?php
+            //Se il carello non è vuoto
             if($count_carrello>0)
             {
+                //Per ogni prodotto all'interno del carello
                 foreach ($carrello as $id_prodotto => $quantita)
                 {
+                  //Prendo il nome, il prezzo, la disponibilità e la foto
                   $query = "SELECT nome_prodotto,prezzo,disponibilita,foto FROM Prodotto WHERE id_prodotto=$id_prodotto";
 
                   //Invio la query al db
@@ -236,12 +240,13 @@
                     //Faccio il fetch dell'array associativo
                     $row = mysqli_fetch_assoc($result_set);
 
+                    //Prendo i dati del prodotto
                     $nome_prodotto =  $row['nome_prodotto'];
                     $prezzo        =  $row['prezzo'];
                     $disponibilita =  $row['disponibilita'];
                     $foto          =  $row['foto'];
 
-                    //stampo il prodotto nel carrello
+                    //Infitne stampo il prodotto nel carrello
                     draw_prodotto_carrello($id_prodotto, $nome_prodotto, $prezzo, $disponibilita, $foto, $quantita);
 
                   }
@@ -249,6 +254,7 @@
             }
             else
             {
+              //Se il carello è vuoto stampo un messaggio di avviso
               echo "<h3 class='text-center'>Carrello Vuoto!</h3>";
             }
             ?>
@@ -261,9 +267,10 @@
   </div><!--content-->
 
   <?php
+    //Disegno il footer e chiudo la connessione al database
     draw_footer();
+    mysqli_close($connessione);
   ?>
   </body>
 
 </html>
-<?php mysqli_close($connessione); ?>

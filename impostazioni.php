@@ -1,5 +1,11 @@
 <?php
 
+  /*
+    File:impostazioni.php
+    Il file in questione permette di gestire l'indirizzo di spedizione predefinito, inserire un nuovo
+    metodo di pagamento e di modificare la password dell'acount.
+  */
+
   include "libreria.php";
 
   /*Avvio la sessione e controllo che il login sia stato effettuato*/
@@ -15,15 +21,15 @@
 
   //Modificato si riferisce all'indirizzo, se è stato modificato verra impostato a true successivamente
   $modificato = false;
+
+  //Se la password viene modificata con successo verrà impostato a true
   $password_modificata = false;
 
-   //La variabile controlla se tutti i campi del form sono stati inizializati
-   $formOk = true;
-
+  //La variabile controlla se tutti i campi del form sono stati inizializati
+  $formOk = true;
 
   //Apro la connessione per poi utilizzarla nelle query
   $connessione = connessione_db();
-
 
   //Se richiesto modifico l'indirizzo di spedizone predefinito
   if($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['password']))
@@ -48,7 +54,6 @@
     }
 
     //Prendo la password attuale
-
     $query = "SELECT password FROM utente WHERE id_utente ='$id_utente';";
 
     //Invio la query al db
@@ -83,20 +88,24 @@
      {
        die(mysqli_error($connessione));
      }
-
+      //Se abbiamo modificato la password mettiamo questo flag a true che farà in modo di
+      //stampare la scritta "Password Cambiata"
      $password_modificata = true;
    }
  }
 
-
+//Cambiamo l'indirizzo di spedizione predefinito
  if($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['nuovo_indirizzo']))
  {
+   //Se il nuovo indirizzo è impstato
     if(!empty($_POST['nuovo_indirizzo']))
     {
+      //Lo mettiamo nella variabile
       $nuovo_indirizzo = test_input($_POST['nuovo_indirizzo']);
     }
     else if(!$formOk)
     {
+      //Stampiamo un messaggio d'errore
       errore("Form non compilato correttamente");
       die();
     }
@@ -113,11 +122,12 @@
       die(mysqli_error($connessione));
     }
 
+    //Se abbiamo modificato l'indirizzo mettiamo questo flag a true che farà in modo di
+    //stampare la scritta "Salvato"
     $modificato = true;
   }
 
    //Prendo l'indirizzo di spedizione
-
    $query = "SELECT indirizzo_spedizione FROM utente WHERE id_utente ='$id_utente';";
 
    //Invio la query al db
@@ -137,6 +147,9 @@
      $indirizzo = $row['indirizzo_spedizione'];
    }
 
+   //Chiudo la connessione al db
+   mysqli_close($connessione);
+
 ?>
 <html>
   <head>
@@ -152,6 +165,7 @@
   </head>
   <body>
     <?php
+    //Prendo nome e cognome dell'utente e stampo la navbar
       $user = $_SESSION['nome'] . " " . $_SESSION['cognome'];
       draw_navbar("",$user, count_carrello());
     ?>
@@ -176,6 +190,7 @@
               </div>
             </div>
             <?php
+              //Se abbiamo modificato l'indirizzo stampa "Salvato"
               if($modificato)
                 echo "<h5 style='color:green;'>Salvato</h5>";
             ?>
@@ -183,6 +198,7 @@
             </form>
           </div>
         </div>
+        <!-- INSERIMENTO CARTA -->
         <div class="col-sm-3 col-xs-12">
           <h4>Aggiungi Carta</h4>
         </div>
@@ -226,8 +242,8 @@
                  </div>
                  <div class="col-xs-6">
                    <button type="submit" class="btn btn-primary">Aggiungi Carta</button>
+                 </div>
                </div>
-             </div>
           </form>
         </div>
       </div>
@@ -236,6 +252,7 @@
       <div class="col-sm-3 col-xs-12">
         <h4>Cambia Password</h4>
         <?php
+        //Se abbiamo modificato la password stampa "Passwword Cambiata"
           if($password_modificata)
             echo "<h5 style='color:green;'>Password Cambiata</h5>";
         ?>

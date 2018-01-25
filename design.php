@@ -1,6 +1,6 @@
 <?php
 
-  /* design.php created by Simon Pietro 27/11/2017-00:09 */
+  /* design.php */
   // Questo file contiene funzioni in php per la creazione di parti
   // grafiche per il sito come title, footer, navbar ecc
 

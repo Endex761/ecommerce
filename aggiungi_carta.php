@@ -1,5 +1,5 @@
 <?php
-  /* singup_result.php created by Simon Pietro */
+  /* aggiungi_carta.php */
 
   /*
     Il file contiene il codice necessario per inserire un nuovo utente all'interno del database

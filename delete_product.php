@@ -1,5 +1,5 @@
 <?php
-  /* login_result.php created Simon Pietro 03/12/2017 - 16:05 */
+  /* delete_product.php */
   /*
     Il file contiene il codice necessario per eliminare un prodotto al database e la relativa immagine
   */

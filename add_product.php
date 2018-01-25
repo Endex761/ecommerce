@@ -1,5 +1,5 @@
 <?php
-  /* login_result.php created Simon Pietro 02/12/2017 - 18:56 */
+  /* add_product.php  */
   /*
     Il file contiene il codice necessario per aggiungere un prodotto al database
   */

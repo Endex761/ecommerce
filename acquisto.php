@@ -1,7 +1,7 @@
 <?php
 
   /*
-  File: acqusto.php
+  File: acquisto.php
   Lo script consente di scegliere l'indirizzo di spedizione, fatturazione e il metodo di pagamento per acquistare
   i prodotti all'interno del carrello.
   Dopo aver controllato che il carello contiene articoli viene calcolato e mostrato il totale degli articoli

@@ -1,5 +1,5 @@
 <?php
-  /* login_result.php created Simon Pietro 22/11/2017 -11:18 */
+  /* login_result.php */
   /*
     Il file contiene il codice necessario per fare il login al sitoweb
   */

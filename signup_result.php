@@ -1,5 +1,5 @@
 <?php
-  /* singup_result.php created by Simon Pietro */
+  /* signup_result.php */
 
   /*
     Il file contiene il codice necessario per inserire un nuovo utente all'interno del database
@@ -107,7 +107,8 @@
   if(!$query_inserimento_ok)
     errore("Errore registrazione");
   else
-    echo "INSERITA CORRETTAMENTE";
+    reindirizza("login.php");
+
 
   //Chiudo la connessione al DATABASE_NAME
   mysqli_close($connessione);

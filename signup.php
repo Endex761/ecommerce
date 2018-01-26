@@ -1,21 +1,25 @@
 <?php
 
+  /*
+    File:signup.php
 
+    Il file consete ad un nuovo utente di registrarti fornendo le informazioni richiesta nel form
+    Se si è già registrati è possibile passare al login
+  */
+  include 'libreria.php';
  ?>
 
 <!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Rende responsive il tutto-->
-    <!--<link rel="stylesheet" type="text/css" href="css/basic.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="css/navbar.css">-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>RS Furnitures - Registrazione </title>
+    <?php include_bootstrap(); ?>
 
   </head>
   <body>
 
-    <section >
+    <section>
       <div class="container-fluid col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
 
@@ -127,11 +131,9 @@
   </div><!--content-->
   </section>
 
-  <footer>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="footer">
-      <p>SR Furnitures Copyright @ 2017 Simon Pietro Romeo & Dario Stella</p>
-    </div>
-  </footer>
+  <?php
+    draw_footer();
+  ?>
 
   <script type="text/javascript" src="js/functions.js"></script>
   </body>

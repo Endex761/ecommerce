@@ -5,9 +5,9 @@
   // grafiche per il sito come title, footer, navbar ecc
 
   /* Funzione draw_prodotto che prende come parametri le caratteristiche di un prodotto nel database
-     e le stampa in un panel. Nell pannel-heading verra' stampato il nome del prodotto.
+     e le stampa in un panel. Nel pannel-heading verra' stampato il nome del prodotto.
      All' interno del panel-body viene mostrata una foto del prodotto e la descrizione.
-     Nel panel-footer viene mostrato il prezzo del prodotto, se la disoponibilità è 0 mostra
+     Nel panel-footer viene mostrato il prezzo del prodotto, se la disponibilità è 0 mostra
      il messaggio "Prodotto non disponibile". Viene inoltre stampato un pulsante per aggiungere
      un istanza del prodotto all'interno del carrello.
      La funzione viene utilizzata nella pagina shop.php */
@@ -19,7 +19,7 @@
     //e il pulzante per aggiungere il prodotto nel carrello viene disabilitato.
     $disabled = "";
 
-    //Script del pulsante per aggiungere il prodott al carello
+    //Script del pulsante per aggiungere il prodotto al carrello
     $script = "location.href = \"carrello.php?add=$id_prodotto\"";
 
     echo "<div class='col-sm-4 col-xs-12'>";
@@ -39,7 +39,7 @@
     {
       echo "       <h3 style='color:red'>Prodotto non disponibile</h3>";
 
-      //Se non dispobile disabilita il pulzante di acquisto
+      //Se non disponibile disabilita il pulsante di acquisto
       $disabled = "disabled";
 
       // E elimina il reindirizzamento altrimenti viene reindirizzato comunque
@@ -59,12 +59,12 @@
   }
 
   /*Funzione draw_prodotto_carrello prende come parametri le caratteristiche di un prodotto e lo stampa nel
-    formato del carrello con bottoni per la rimozione del prodotto dal carello, pulzanti per aumentare o
-    diminuire la quantità del prodotto all'interno del carello.
-    Se la disponibilità è minore o maggiore del numero di prodotti che vogliono essere aggiunti nel Carrello
+    formato del carrello con bottoni per la rimozione del prodotto dal carello, pulsanti per aumentare o
+    diminuire la quantità del prodotto all'interno del carrello.
+    Se la disponibilità è minore o maggiore del numero di prodotti che vogliono essere aggiunti nel carrello
     i pulsanti + e - vengono disabilitati. Inoltre se il prodotto non  è disponibile per una qualunque ragione
-    viene stampato un messaggio che avverte l'utente che il prodotto non è dispobibile.
-    La funzione viene richiamata all'interno della pagina carello.php */
+    viene stampato un messaggio che avverte l'utente che il prodotto non è disponibile.
+    La funzione viene richiamata all'interno della pagina carrello.php */
 
   function draw_prodotto_carrello($id_prodotto, $nome_prodotto, $prezzo, $disponibilita, $foto, $quantita)
   {
@@ -140,15 +140,15 @@
   /* Funzione che stampa un acquisto in un pannello.
     Nell'header del pannello vengono stampati indirizzo di spedizione, fatturazione, numero carta, prezzo totale e id acquisto.
     All'interno del body vengono stampati i vari prodotti acquistati attraverso la funzione draw_singolo_ordine.
-    Viene stampato inoltre lo stato della spedizione (Non implementato) e il pulzante per visualizzare la fattura dell'acqusito.
-    Questa funzione viene utilizzata nela pagina prodotti.php*/
+    Viene stampato inoltre lo stato della spedizione (Non implementato) e il pulsante per visualizzare la fattura dell'acqusito.
+    Questa funzione viene utilizzata nella pagina prodotti.php*/
 
   function draw_ordine($id_acquisto, $data_acquisto, $indirizzo_spedizione, $indirizzo_fatturazione, $numero_carta, $connessione)
   {
     //Prendo gli ultimi 4 numeri del numero della carta.
     $numero_carta = substr($numero_carta, 15);
 
-    //Seleziono il totale dei prodotti acqustitai per stamparli nell'header.
+    //Seleziono il totale dei prodotti acqustitati per stamparli nell'header.
     $query = "SELECT SUM(prezzo_acquisto*quantita) AS totale FROM Prodotto, AcquistoSingolo WHERE id_acquisto=$id_acquisto AND prodotto.id_prodotto = acquistosingolo.id_prodotto;";
 
     //Invio la query al db
@@ -231,7 +231,7 @@
       //Faccio il fetch dell'array associativo
       while($row = mysqli_fetch_assoc($result_set))
       {
-        //Prendo i dati dei singoli oridni
+        //Prendo i dati dei singoli ordini
         $id_prodotto    = $row['id_prodotto'];
         $nome_prodotto  = $row['nome_prodotto'];
         $prezzo         = $row['prezzo_acquisto'];
@@ -264,9 +264,9 @@
 
   function draw_navbar($ricerca, $user, $count_carrello)
   {
-    //Ricerca è il valore della precendente ricerca da mostrsre nel input
+    //Ricerca è il valore della precendente ricerca da mostrare nell' input
     //User è il nome e il cognome dell'utente loggato da stampare nella nav
-    //Count_carrello è il numero badge accanto al carrello e indica il numero di elementi nel carello
+    //Count_carrello è il numero badge accanto al carrello e indica il numero di elementi nel carrello
     echo "<nav class='navbar navbar-inverse'>";
     echo "  <div>";
     echo "    <div class='navbar-header'>";
@@ -307,7 +307,7 @@
 
   function draw_carta($id_carta, $intestatario, $numero_carta, $mese_scadenza, $anno_scadenza, $codice_sicurezza, $denominazione)
   {
-    //Mostra solo gli ultimi 4 numeri del numero
+    //Mostra solo gli ultime 4 cifre del numero
     $numero_carta = substr($numero_carta, 15);
 
     echo "<div class='col-sm-9 col-xs-12' class='form-control' style='margin-bottom:20px;'>";

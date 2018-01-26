@@ -16,7 +16,7 @@
 
     /*   */
 
-  //La variabile controlla se tutti i campi del form sono stati inizializati
+  //La variabile controlla se tutti i campi del form sono stati inizializzati
   $formOk = true;
 
   //Controllo se sto utilizzando il metodo POST e acquisisco i dati dal form

@@ -28,7 +28,7 @@
     echo "    <div class='panel-body'>";
     echo "      <a href='product_img/$foto'><img src='product_img/$foto' class='img-responsive center-block' height='200px' width='200px'></a>";
     echo "      <hr/>";
-    echo "      <h4>Descrizone:</h4>";
+    echo "      <h4>Descrizione:</h4>";
     echo "      <center>";
     echo "        <p>$descrizione</p>";
     echo "      </center>";
@@ -251,7 +251,7 @@
   function draw_footer()
   {
     echo "<footer class='footer'>";
-    echo "  <div class='col-xs-12 text-center' style='background:#F9F9F9; padding:10px;'>";
+    echo "  <div class='col-xs-12 text-center' style='background:#F0F0F0; padding:10px;'>";
     echo "    <span class='text-muted'>RS Furnitures Copyright @ 2018 Simon Pietro Romeo & Dario Stella</span>";
     echo "  </div>";
     echo "</footer>";
@@ -352,11 +352,13 @@
   }
 
   //Funzione che importa il framework bootstrap cdn e ajax nelle pagine in cui è richiamato.
+  //Importa anche la Favicon, l'iconcina in alto nel tab della pagina.
   function include_bootstrap()
   {
     echo "<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>";
     echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>";
     echo "<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>";
+    echo "<link rel='icon' type='image/x-icon' href='img/favicon.png' />";
   }
 
 

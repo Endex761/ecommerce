@@ -184,7 +184,7 @@
           <div class="col-sm-9 col-xs-12">
             <form action="impostazioni.php" method="post">
             <div class='input-group'>
-              <input name="nuovo_indirizzo" type="text" class="form-control" value="<?php echo $indirizzo ?>">
+              <input name="nuovo_indirizzo" type="text" class="form-control" value="<?php echo $indirizzo ?>" id="nuovo_indirizzo">
               <div class='input-group-btn'>
                 <button class='btn btn-default' type='submit'>Salva</button>
               </div>
@@ -207,7 +207,7 @@
              <div class='col-sm-9 col-xs-12' class='form-control' style='margin-bottom:20px;'>
                <div class='form-group'>
                  <label for=>Carta</label>
-                 <input name='denominazione' type='text' class='form-control' id='denominazione' placeholder="Mastercard, Visa, AmericanExpress..">
+                 <input name='denominazione' type='text' class='form-control' id='denominazione' placeholder="Mastercard, Visa, AmericanExpress.." id="denominazione">
                </div>
                <div class='form-group'>
                  <label for='intestatario'>Intestatario</label>

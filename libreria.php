@@ -6,8 +6,8 @@
   include "design.php";
 
   /*Costante IP che consente il reindirizzamento per un corretto funzionamento delle sessioni.*/
-  //define("IP","localhost:8080");
-  define("IP","2.237.61.241:8080");
+  define("IP","localhost:8080");
+  //define("IP","2.237.61.241:8080");
 
   /*COSTANTE PER LA SCADENZA DEI COOKIE */
   define("GIORNI_SCADENZA_CARRELLO",7);
@@ -27,7 +27,7 @@
   define("DB_NAME","ecommerce");
 
   /* Email administrator */
-  define("ADMIN_EMAIL","admin@rsfurniture.it");
+  define("ADMIN_EMAIL","admin@rsfurnitures.it");
 
   /* Passwrrd administrator */
   define("ADMIN_PASSWORD","administrator");
@@ -58,7 +58,7 @@
     }
   }
 
-  /*Funzione che reindirizza alla pagina error_page.php e restituisce il valore di errore*/
+  /*Funzione che reindirizza alla pagina errore.php che stampa il valore di errore*/
   function errore($message)
   {
     header("Location:" . "http://" . IP . "/ecommerce/errore.php" . "?message=$message");

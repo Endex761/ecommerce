@@ -2,6 +2,7 @@
   //Includo la libreria
   include "libreria.php";
 
+  $message = "";
   //Prendo il messaggio passatomi dal GET
   $message = $_GET['message'];
  ?>

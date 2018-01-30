@@ -94,10 +94,11 @@
        $messaggio = "Risposta errata, password non recuperata, riprova.";
      }
 
+    //Chiudo la connessione al db
+    mysqli_close($connessione);
   }
 
-  //Chiudo la connessione al db
-  mysqli_close($connessione);
+
 
  ?>
 

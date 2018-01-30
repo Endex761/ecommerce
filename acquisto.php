@@ -147,7 +147,7 @@
              <br>
              <label onclick="disableEnable('fatturazione');"><input id="checkbox" name="checkbox" type="checkbox" checked> Utilizza questo indirizzo come indirizzo di fatturazione.</label>
              <br>
-             <a href="impostazioni.php">Cambia indirizzo di spedizione predefinito.</a>
+             <a href="impostazioni.php#nuovo_indirizzo">Cambia indirizzo di spedizione predefinito.</a>
            </div>
          </div>
 
@@ -217,13 +217,13 @@
               echo "<h3>Non hai inserito nessuna carta</h3>";
 
               //Fornisco all'utente il link per aggiungere una nuova carta.
-              echo "<a href='impostazioni.php'>Vai alle impostazioni</a>";
+              echo "<a href='impostazioni.php#denominazione'>Vai alle impostazioni</a>";
             }
            ?>
          </div> <!-- FINE CARTE -->
        </div>
        </form>
-       
+
      <?php draw_footer(); ?>
    </body>
 </html>

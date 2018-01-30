@@ -162,7 +162,7 @@
 
       </tbody>
     </table>
-    <center><button class="btn btn-primary" onclick="print();">Stampa</button></center>
+    <center><button class="btn btn-primary" onclick="this.style='display:none'; print(); this.style='display:block';">Stampa</button></center>
   </div>
   </body>
 </html>

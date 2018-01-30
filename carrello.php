@@ -90,7 +90,9 @@
     //DIMINUZIONE DI UNA UNITA' DELLA QUANTITA' DEL PRODOTTO
     if(isset($_GET['minus']))
     {
-      //Prendo il valore di add e lo metto nella variabile dopo averlo testato
+
+      //La variabile minus contiene  l'id del prodotto ceh vogliamo diminuire
+      //Prendo il valore di minus e lo metto nella variabile dopo averlo testato
       $minus = test_input($_GET['minus']);
 
       //Se la quantità è 1 e premo - rimuovo il prodotto dal carello
@@ -113,13 +115,14 @@
     // RIMOZIONE PRODOTTO DAL CARRELLO
     if(isset($_GET['remove']))
     {
-      //Prendo il valore di add e lo metto nella variabile dopo averlo testato
+      //Remove contiene l'id del prodotto che voglioamo rimuovere dal carrello
+      //Prendo il valore di remove lo metto nella variabile dopo averlo testato
       $remove = test_input($_GET['remove']);
 
       //Se il prodotto è già presente nel carrello
       if(isset($carrello[$remove]))
       {
-        //Diminuisci la quantità del prodotto nel carrello
+        //Rimuovo il valore dal vettore
         unset($carrello[$remove]);
       }
 
@@ -246,7 +249,7 @@
                     $disponibilita =  $row['disponibilita'];
                     $foto          =  $row['foto'];
 
-                    //Infitne stampo il prodotto nel carrello
+                    //Infine stampo il prodotto nel carrello
                     draw_prodotto_carrello($id_prodotto, $nome_prodotto, $prezzo, $disponibilita, $foto, $quantita);
 
                   }

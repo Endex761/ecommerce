@@ -198,7 +198,7 @@
     echo "      </div>";
     echo "      <div class='col-md-2 col-xs-12'>";
     echo "        <strong>Pagamento:</strong>";
-    echo "        <p>****-****-****-$numero_carta</p>";
+    echo "        <p>**** **** **** $numero_carta</p>";
     echo "      </div>";
     echo "      <div class='col-md-1 col-xs-12'>";
     echo "        <strong>ID Ordine:</strong>";
@@ -252,7 +252,7 @@
   {
     echo "<footer class='footer'>";
     echo "  <div class='col-xs-12 text-center' style='background:#F0F0F0; padding:10px;'>";
-    echo "    <span class='text-muted'>RS Furnitures Copyright @ 2018 Simon Pietro Romeo & Dario Stella</span>";
+    echo "    <span class='text-muted'>RS Furnitures Copyright @ 2018 Romeo Simon Pietro & Dario Stella </span>";
     echo "  </div>";
     echo "</footer>";
   }

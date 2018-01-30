@@ -12,6 +12,8 @@
   //La variabile controlla se tutti i campi del form sono stati inizializati
   $formOk = true;
 
+  $mail = true;
+
   //Controllo se sto utilizzando il metodo POST e acquisisco i dati dal form
   //Mi assicuro che i dati sono stati inizializzati
   //Se i dati sono inizializzati controllo che non ci sia codice malevolo con la funzione test_input
@@ -84,6 +86,7 @@
       $_SESSION['id_utente']  = $row['id_utente'];
       $_SESSION['nome']       = $row['nome'];
       $_SESSION['cognome']    = $row['cognome'];
+
       if($mail)
         reindirizza("impostazioni.php#password_vecchia");
       else

@@ -11,7 +11,7 @@
 
   //Apro la connessione per poi utilizzarla nelle query
   $connessione = connessione_db();
-  
+
   //Seleziona 9 prodotti casuali da mostrare nello shop
   $search_query = "SELECT * FROM prodotto WHERE disponibilita > 0 ORDER BY rand() LIMIT 9;";
 
@@ -51,7 +51,7 @@
       </div>
     </nav>
 
-    <div class="col-xs-10 col-xs-offset-1 container" >
+    <div class="col-sm-10 col-sm-offset-1 col-xs-12 container" >
     <div class="jumbotron" id="chisiamo">
       <h1 style="color:orange;">RS Furnitures</h1>
       <p>Siamo una piccola azienda siciliana che si occupa della produzione e della vendita di arredamento per case e uffici.</p>
@@ -61,9 +61,10 @@
   </div>
 
     <div class="container-fluid">
-      <div class="col-xs-6 col-xs-offset-3 text-center" id="prodotti" style="background-color:white;">
+      <div class="col-sm-6 col-sm-offset-3 col-xs-12 text-center" id="prodotti" style="background-color:white; border-radius: 5px; margin-bottom:10px;">
         <h1> Ecco alcuni dei nostri prodotti </h1>
       </div>
+
 
       <!-- prodotti -->
       <div class="col-xs-12" >

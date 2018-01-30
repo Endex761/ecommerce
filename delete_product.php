@@ -25,7 +25,7 @@
     //Mi connetto al database
     $connessione = connessione_db();
 
-    //Creo la query per eliminare il il record
+    //Creo la query per eliminare il record del prodotto
     $query = "DELETE FROM Prodotto WHERE id_prodotto = '$id_prodotto';";
 
     //Lancio la query e metto il risultato nel result_set
@@ -46,7 +46,7 @@
     //La funzione unlink permette di eliminare un file locale
     if(!unlink($base_dir . $_GET['id'] . ".jpg"))
     {
-      errore("Foro non eliminata.");
+      errore("Foto non eliminata.");
     }
 
     //Infine reindirizzo l'admin alla pagina dei prodotti

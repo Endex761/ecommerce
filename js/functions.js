@@ -7,12 +7,6 @@ function checkPassword(input)
       input.setCustomValidity('');
 }
 
-function asyncRequest(page,method)
-{
-  xhttp.open(method, page, true);
-  return xhttp.send();
-}
-
 //Funzione che disabilita un div html.
 function disable(id)
 {
@@ -38,7 +32,7 @@ function disableEnable(id)
   }
 }
 
-//Funzione che aggiunge automaticamente i trattini all'interno del campo "Numero carta" 
+//Funzione che aggiunge automaticamente i trattini all'interno del campo "Numero carta"
 function numeroCarta(id)
 {
   var codice = id.value.toString();
@@ -59,7 +53,7 @@ function tornaIndietro()
 }
 
 //Funzione che controlla che il mese di scandenza della carta sia compreso tra 1 e 12
-function checkMonth(element) 
+function checkMonth(element)
 {
   var mese = element.value;
   if(mese <1 || mese >12)

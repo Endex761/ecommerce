@@ -207,7 +207,13 @@
              <div class='col-sm-9 col-xs-12' class='form-control' style='margin-bottom:20px;'>
                <div class='form-group'>
                  <label for=>Carta</label>
-                 <input name='denominazione' type='text' class='form-control' id='denominazione' placeholder="Mastercard, Visa, AmericanExpress.." id="denominazione">
+                 <!--<input name='denominazione' type='text' class='form-control' id='denominazione' placeholder="Mastercard, Visa, AmericanExpress.." id="denominazione">-->
+                 <select class="form-control" id="denominazione" name="denominazione">
+                 	<option value="Mastercard">Mastercard</option>
+                 	<option value="Visa">Visa</option>
+                 	<option value="AmericanExpress">AmericanExpress</option>
+                 	<option value="Discover">Discover</option>
+                 </select>
                </div>
                <div class='form-group'>
                  <label for='intestatario'>Intestatario</label>

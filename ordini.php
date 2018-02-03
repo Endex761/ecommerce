@@ -55,7 +55,7 @@
         <?php
 
         //Prendo dal db tutti gli acquisti fatti da un utente.
-        $query = "SELECT id_acquisto, data_acquisto, acquisto.indirizzo_spedizione AS indirizzo_spedizione, indirizzo_fatturazione, numero_carta FROM carta,utente,acquisto WHERE utente.id_utente = $id_utente AND carta.id_utente = utente.id_utente AND acquisto.id_utente = utente.id_utente AND carta.id_carta = acquisto.id_carta ORDER BY id_acquisto DESC;";
+        $query = "SELECT id_acquisto, data_acquisto, acquisto.indirizzo_spedizione AS indirizzo_spedizione, indirizzo_fatturazione, numero_carta FROM carta,utente,acquisto WHERE utente.id_utente = $id_utente AND acquisto.id_utente = utente.id_utente AND carta.id_carta = acquisto.id_carta ORDER BY id_acquisto DESC;";
 
         //Invio la query al db
         $result_set = mysqli_query($connessione, $query);

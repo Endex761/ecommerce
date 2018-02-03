@@ -170,11 +170,20 @@
        <div class="col-sm-9 col-xs-12" style="border-radius: 5px; padding-top:5px; background-color:#F9F9F9">
          <div class="col-sm-3 col-xs-12">
            <h4>Metodo Pagamento:</h4>
-           <h6>(Le tue carte)</h6>
+           <!--<h6>(Le tue carte)</h6>-->
          </div>
 
          <div class="col-sm-9 col-xs-12"> <!-- QUI DENTRO VANNO LE CARTE -->
 
+           <div class ="col-sm-9 col-xs-12">
+                <label class='pull-right' for='contrassegno'>Pagamento in contrassegno </label><input class='pull-right' type='radio' name='id_carta' value='999' required>
+           </div>
+
+           <div class="col-xs-12">
+             <br>
+           </div>
+
+           <br>
           <?php
             //Stampiamo le carte dell'utente
             //$id_utente = $_SESSION['id_utente']; dichiarato sopra

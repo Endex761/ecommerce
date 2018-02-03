@@ -128,7 +128,7 @@
   }
 
    //Prendo l'indirizzo di spedizione
-   $query = "SELECT indirizzo_spedizione FROM utente WHERE id_utente ='$id_utente';";
+   $query = "SELECT indirizzo_spedizione,nome, cognome FROM utente WHERE id_utente ='$id_utente';";
 
    //Invio la query al db
    $result_set = mysqli_query($connessione, $query);
@@ -145,6 +145,8 @@
      //Faccio il fetch dell'array associativo
      $row = mysqli_fetch_assoc($result_set);
      $indirizzo = $row['indirizzo_spedizione'];
+     $nome = $row['nome'];
+     $cognome = $row['cognome'];
    }
 
    //Chiudo la connessione al db
@@ -186,6 +188,29 @@
             <div class='input-group'>
               <input name="nuovo_indirizzo" type="text" class="form-control" value="<?php echo $indirizzo ?>" id="nuovo_indirizzo">
               <div class='input-group-btn'>
+                <button class='btn btn-default' type='submit'>Salva</button>
+              </div>
+            </div>
+            <?php
+              //Se abbiamo modificato l'indirizzo stampa "Salvato"
+              if($modificato)
+                echo "<h5 style='color:green;'>Salvato</h5>";
+            ?>
+
+            </form>
+          </div>
+        </div>
+
+        <div class="row" style="padding:10px;">
+          <div class="col-sm-3 col-xs-12">
+            <h4>Nome e cognome:</h4>
+          </div>
+          <div class="col-sm-9 col-xs-12">
+            <form action="cambianome.php" method="post">
+            <div class='input'>
+              <input name="nuovo_nome" type="text" class="form-control" value="<?php echo $nome ?>" id="nuovo_nome">
+              <input name="nuovo_cognome" type="text" class="form-control" value="<?php echo $cognome ?>" id="nuovo_cognome">
+              <div class='btn'>
                 <button class='btn btn-default' type='submit'>Salva</button>
               </div>
             </div>

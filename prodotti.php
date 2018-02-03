@@ -65,6 +65,88 @@
 			}
 		}
 
+//AUMENTO IL PREZZO
+		if(isset($_GET['plus']))
+		{
+			//Prendo il valore di add e lo metto nella variabile dopo averlo testato
+			$plus = test_input($_GET['plus']);
+
+			//Prendo la disponibilità del prodotto che intendo rifornire
+			$query = "SELECT prezzo FROM Prodotto WHERE id_prodotto=$plus;";
+
+			//Invio la query al db
+			$result_set = mysqli_query($connessione, $query);
+
+			//Controllo se non ci sono errori nella query
+			if($result_set == false)
+			{
+				die(mysqli_error($connessione));
+			}
+
+			//Controllo se ci sono righe nel risultato
+			if(mysqli_num_rows($result_set) > 0)
+			{
+				//Faccio il fetch dell'array associativo
+				$row = mysqli_fetch_assoc($result_set);
+				$prezzo = $row['prezzo'];
+			}
+			//Aumento la disponibilità di uno
+			$prezzo_aggiornato = $prezzo + 1.0;
+
+			//E la inserisco nel database
+			$query_rifornimento = "UPDATE prodotto SET prezzo=$prezzo_aggiornato WHERE id_prodotto=$plus;";
+
+			//Invio la query al db
+			$result_set = mysqli_query($connessione, $query_rifornimento);
+
+			//Controllo se non ci sono errori nella query
+			if($result_set == false)
+			{
+				die(mysqli_error($connessione));
+			}
+
+		}
+//DIMINUISCO IL PREZZO
+		if(isset($_GET['minus']))
+		{
+			//Prendo il valore di add e lo metto nella variabile dopo averlo testato
+			$minus = test_input($_GET['minus']);
+
+			//Prendo la disponibilità del prodotto che intendo rifornire
+			$query = "SELECT prezzo FROM Prodotto WHERE id_prodotto=$minus;";
+
+			//Invio la query al db
+			$result_set = mysqli_query($connessione, $query);
+
+			//Controllo se non ci sono errori nella query
+			if($result_set == false)
+			{
+				die(mysqli_error($connessione));
+			}
+
+			//Controllo se ci sono righe nel risultato
+			if(mysqli_num_rows($result_set) > 0)
+			{
+				//Faccio il fetch dell'array associativo
+				$row = mysqli_fetch_assoc($result_set);
+				$prezzo = $row['prezzo'];
+			}
+			//Aumento la disponibilità di uno
+			$prezzo_aggiornato = $prezzo - 1.0;
+
+			//E la inserisco nel database
+			$query_rifornimento = "UPDATE prodotto SET prezzo=$prezzo_aggiornato WHERE id_prodotto=$minus;";
+
+			//Invio la query al db
+			$result_set = mysqli_query($connessione, $query_rifornimento);
+
+			//Controllo se non ci sono errori nella query
+			if($result_set == false)
+			{
+				die(mysqli_error($connessione));
+			}
+		}
+
 ?>
 
 <html>
@@ -97,6 +179,7 @@
 			        <th class="text-center">Prezzo</th>
 			        <th class="text-center">Disponibilità</th>
 			        <th class="text-center">Foto</th>
+							<th class="text-center">Acquisti</th>
 							<th></th>
 			      </tr>
 			    </thead>
@@ -109,7 +192,8 @@
 								<td><input class="form-control" type="text" name="descrizione" placeholder="Descrizione"></td>
 								<td><input class="form-control" type="text" name="prezzo" placeholder="Prezzo"></td>
 								<td><input class="form-control" type="number" name="disponibilita" placeholder="Disponibilità"></td>
-								<td><input type="file" name="foto"  accept=".jpg, .jpeg, .png"></td>
+								<td><input type="file" name="foto"  accept=".jpg, .jpeg"></td>
+								<td></td>
 								<td><button type="submit" class="btn-link"><span class="glyphicon glyphicon-plus"></span></button></td>
 							</form>
 						</tr>
@@ -147,13 +231,21 @@
 									$disponibilita 	= $row['disponibilita'];
 									$foto         	= $row['foto'];
 
+									//Prendo il numero di prodotti acquistati
+									$q = "SELECT SUM(quantita) AS sum FROM acquistosingolo WHERE id_prodotto = $id_prodotto;";
+									$rs = mysqli_query($connessione, $q);
+									$r = mysqli_fetch_assoc($rs);
+									$acquisti = $r['sum'];
+									if($acquisti == "")
+										$acquisti = 0;
+
 									//Le li stampo all'interno di una tabella
 
 									echo "<tr class='text-center'>";
 									echo "	<td>$id_prodotto</td>";
 									echo "	<td>$nome_prodotto</td>";
 									echo "	<td>$descrizione</td>";
-									echo "	<td>$prezzo</td>";
+									echo "	<td><a href='prodotti.php?minus=$id_prodotto'><span class='glyphicon glyphicon-minus'></span></a> $prezzo <a href='prodotti.php?plus=$id_prodotto'><span class='glyphicon glyphicon-plus'></span></a></td>";
 
 									//Se la disponibilità è 0 coloro il numero di ROSSO
 									if($disponibilita == 0)
@@ -161,6 +253,7 @@
 									else
 										echo "<td>$disponibilita <a href='prodotti.php?add=$id_prodotto'>Rifornisci</a></td>";
 									echo "	<td>$foto</td>";
+									echo "	<td>$acquisti</td>";
 									echo "	<td>";
 									echo "		<a href='delete_product.php?id=$id_prodotto'><span class='glyphicon glyphicon-trash'></span></a>";
 									echo "	</td>";

@@ -146,7 +146,8 @@
   function draw_ordine($id_acquisto, $data_acquisto, $indirizzo_spedizione, $indirizzo_fatturazione, $numero_carta, $connessione)
   {
     //Prendo gli ultimi 4 numeri del numero della carta.
-    $numero_carta = substr($numero_carta, 15);
+    if(!($numero_carta == "Contrassegno"))
+      $numero_carta = "**** **** **** " . substr($numero_carta, 15);
 
     //Seleziono il totale dei prodotti acqustitati per stamparli nell'header.
     $query = "SELECT SUM(prezzo_acquisto*quantita) AS totale FROM Prodotto, AcquistoSingolo WHERE id_acquisto=$id_acquisto AND prodotto.id_prodotto = acquistosingolo.id_prodotto;";
@@ -198,7 +199,7 @@
     echo "      </div>";
     echo "      <div class='col-md-2 col-xs-12'>";
     echo "        <strong>Pagamento:</strong>";
-    echo "        <p>**** **** **** $numero_carta</p>";
+    echo "        <p>$numero_carta</p>";
     echo "      </div>";
     echo "      <div class='col-md-1 col-xs-12'>";
     echo "        <strong>ID Ordine:</strong>";

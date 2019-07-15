@@ -7,7 +7,6 @@
 
   /*Costante IP che consente il reindirizzamento per un corretto funzionamento delle sessioni.*/
   define("IP","localhost:8080");
-  //define("IP","2.237.61.241:8080");
 
   /*COSTANTE PER LA SCADENZA DEI COOKIE */
   define("GIORNI_SCADENZA_CARRELLO",7);
